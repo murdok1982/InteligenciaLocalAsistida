@@ -1,0 +1,316 @@
+{
+  "rss_feeds": [
+    {
+      "name": "Reuters World",
+      "url": "https://feeds.reuters.com/reuters/worldNews",
+      "categories": ["general", "diplomacy", "economy"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Reuters Business",
+      "url": "https://feeds.reuters.com/reuters/businessNews",
+      "categories": ["economy", "finance"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "BBC World News",
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "categories": ["general", "diplomacy", "security"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "BBC Mundo",
+      "url": "https://feeds.bbci.co.uk/mundo/rss.xml",
+      "categories": ["general", "diplomacy", "economy"],
+      "region": "América Latina",
+      "language": "es",
+      "reliability": "A"
+    },
+    {
+      "name": "Al Jazeera English",
+      "url": "https://www.aljazeera.com/xml/rss/all.xml",
+      "categories": ["general", "security", "diplomacy"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "France 24 Español",
+      "url": "https://www.france24.com/es/rss",
+      "categories": ["general", "diplomacy", "economy"],
+      "region": "Global",
+      "language": "es",
+      "reliability": "A"
+    },
+    {
+      "name": "DW Español",
+      "url": "https://rss.dw.com/rdf/rss-es-all",
+      "categories": ["general", "economy", "diplomacy"],
+      "region": "Global",
+      "language": "es",
+      "reliability": "A"
+    },
+    {
+      "name": "The Guardian World",
+      "url": "https://www.theguardian.com/world/rss",
+      "categories": ["general", "diplomacy", "security"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Financial Times",
+      "url": "https://www.ft.com/rss/home/us",
+      "categories": ["economy", "finance", "geopolitics"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "RAND Corporation",
+      "url": "https://www.rand.org/pubs/rss.xml",
+      "categories": ["defense", "intelligence", "security"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "SIPRI",
+      "url": "https://www.sipri.org/rss.xml",
+      "categories": ["defense", "security", "disarmament"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Chatham House",
+      "url": "https://www.chathamhouse.org/rss.xml",
+      "categories": ["geopolitics", "diplomacy", "defense"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Council on Foreign Relations",
+      "url": "https://www.cfr.org/rss/publications",
+      "categories": ["diplomacy", "geopolitics", "security"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Brookings Institution",
+      "url": "https://www.brookings.edu/feed/",
+      "categories": ["economy", "diplomacy", "security"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "IISS",
+      "url": "https://www.iiss.org/rss",
+      "categories": ["defense", "security", "military"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "ISS Africa",
+      "url": "https://issafrica.org/rss",
+      "categories": ["security", "defense"],
+      "region": "África Subsahariana",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Jane's 360",
+      "url": "https://www.janes.com/feeds/news",
+      "categories": ["defense", "military", "intelligence"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Defense News",
+      "url": "https://www.defensenews.com/arc/outboundfeeds/rss/",
+      "categories": ["defense", "military"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "War on the Rocks",
+      "url": "https://warontherocks.com/feed/",
+      "categories": ["defense", "security", "intelligence"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Lawfare",
+      "url": "https://www.lawfaremedia.org/rss.xml",
+      "categories": ["intelligence", "security", "law"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Foreign Affairs",
+      "url": "https://www.foreignaffairs.com/rss.xml",
+      "categories": ["diplomacy", "geopolitics"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Foreign Policy",
+      "url": "https://foreignpolicy.com/feed/",
+      "categories": ["diplomacy", "geopolitics", "security"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Bellingcat",
+      "url": "https://www.bellingcat.com/feed/",
+      "categories": ["intelligence", "osint", "security"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "B"
+    },
+    {
+      "name": "The Diplomat",
+      "url": "https://thediplomat.com/feed/",
+      "categories": ["diplomacy", "geopolitics"],
+      "region": "Asia Oriental",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Middle East Eye",
+      "url": "https://www.middleeasteye.net/rss",
+      "categories": ["general", "security", "diplomacy"],
+      "region": "Oriente Medio",
+      "language": "en",
+      "reliability": "B"
+    },
+    {
+      "name": "RT en Español",
+      "url": "https://actualidad.rt.com/rss",
+      "categories": ["general", "diplomacy"],
+      "region": "Global",
+      "language": "es",
+      "reliability": "C"
+    },
+    {
+      "name": "Xinhua English",
+      "url": "http://www.xinhuanet.com/english/rss/worldrss.xml",
+      "categories": ["general", "diplomacy", "economy"],
+      "region": "Asia Oriental",
+      "language": "en",
+      "reliability": "C"
+    },
+    {
+      "name": "TASS",
+      "url": "http://tass.com/rss/v2.xml",
+      "categories": ["general", "diplomacy", "defense"],
+      "region": "Europa del Este",
+      "language": "en",
+      "reliability": "C"
+    },
+    {
+      "name": "AP News World",
+      "url": "https://apnews.com/rss/apf-intlnews",
+      "categories": ["general", "diplomacy"],
+      "region": "Global",
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "El País Internacional",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada",
+      "categories": ["general", "diplomacy", "economy"],
+      "region": "Global",
+      "language": "es",
+      "reliability": "A"
+    }
+  ],
+  "youtube_channels": [
+    {
+      "name": "CSIS",
+      "channel_id": "UCnMTB1gBv8p5wfiTXMI1saw",
+      "categories": ["defense", "security", "geopolitics"],
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Council on Foreign Relations",
+      "channel_id": "UCe-5bH-oD4QoXLN3_1e7hzw",
+      "categories": ["diplomacy", "geopolitics"],
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Chatham House",
+      "channel_id": "UCqWEcBfAuXaVQDMZXh_CNYQ",
+      "categories": ["geopolitics", "diplomacy", "defense"],
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "BBC Mundo",
+      "channel_id": "UCF3gZFO9kcOIAYwcZaRFMtQ",
+      "categories": ["general", "diplomacy"],
+      "language": "es",
+      "reliability": "A"
+    },
+    {
+      "name": "DW Español",
+      "channel_id": "UCxK9dNLiVWX5N6IlbgCMEoA",
+      "categories": ["general", "economy", "diplomacy"],
+      "language": "es",
+      "reliability": "A"
+    },
+    {
+      "name": "France 24 Español",
+      "channel_id": "UCN7YXKfBhfnHCNq8mYvgbFg",
+      "categories": ["general", "diplomacy"],
+      "language": "es",
+      "reliability": "A"
+    },
+    {
+      "name": "Stratfor",
+      "channel_id": "UCB31NVh95xHTSs6W1J3YbSg",
+      "categories": ["geopolitics", "intelligence", "defense"],
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "Real Vision Finance",
+      "channel_id": "UCBHM_zOQ5MHHmMBBkMR3iHg",
+      "categories": ["economy", "finance"],
+      "language": "en",
+      "reliability": "B"
+    },
+    {
+      "name": "Al Jazeera English",
+      "channel_id": "UCNye-wNBqNL5ZzHSJdse18g",
+      "categories": ["general", "security", "diplomacy"],
+      "language": "en",
+      "reliability": "A"
+    },
+    {
+      "name": "RAND Corporation",
+      "channel_id": "UC8K4p5X29-F7K_U2QlPpiqA",
+      "categories": ["defense", "security", "intelligence"],
+      "language": "en",
+      "reliability": "A"
+    }
+  ]
+}

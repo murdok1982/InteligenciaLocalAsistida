@@ -1,0 +1,53 @@
+# INFORME DE INTELIGENCIA ESTRATÉGICA GLOBAL
+**Clasificación:** {{ classification | default('ABIERTO') }}
+**Periodo analizado:** últimos {{ days_back | default(7) }} días
+**Generado:** {{ timestamp }}
+**Sistema:** InteligenciaGeopolitica v2.0 — Motor: {{ llm_provider | upper }} / {{ llm_model }}
+
+---
+
+## VERSIÓN EN ESPAÑOL
+
+### Resumen Ejecutivo
+{{ executive_summary_es }}
+
+---
+
+### Síntesis Regional
+{{ regional_synthesis_es }}
+
+---
+
+### Análisis por País
+{{ country_sections_es }}
+
+---
+
+### Panorama Global y Previsiones
+{{ global_overview_es }}
+
+---
+---
+
+## ENGLISH VERSION
+
+### Executive Summary
+{{ executive_summary_en }}
+
+---
+
+### Regional Synthesis
+{{ regional_synthesis_en }}
+
+---
+
+### Country Analysis
+{{ country_sections_en }}
+
+---
+
+### Global Outlook & Forecasts
+{{ global_overview_en }}
+
+---
+*Report generated automatically by InteligenciaGeopolitica. Sources: RSS open feeds, GDELT, YouTube public channels. All analysis is AI-assisted and requires human validation before operational use.*

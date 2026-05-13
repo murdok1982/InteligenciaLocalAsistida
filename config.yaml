@@ -1,19 +1,38 @@
 
 run:
-  days_back: 365
-  per_country_limit: 16
-  providers: ["gdelt", "newsapi"]
-  languages: ["es","en"]
+  days_back: 7
+  per_country_limit: 20
+  providers: ["gdelt", "rss", "youtube"]   # options: gdelt, newsapi, rss, youtube
+  languages: ["es", "en"]
+  schedule: "weekly"                         # weekly | manual
 
 llm:
-  model: ${OPENAI_MODEL}
-  temperature: 0.5
+  provider: ${LLM_PROVIDER:-ollama}          # ollama | openai | auto
+  ollama_model: ${OLLAMA_MODEL:-gemma4:4b}
+  ollama_base_url: ${OLLAMA_BASE_URL:-http://localhost:11434}
+  openai_model: ${OPENAI_MODEL:-gpt-4o-mini}
+  temperature: 0.3
   max_tokens: 2000
 
 report:
   output_dir: outputs
   filename_prefix: reporte_inteligencia_global
   include_tables: true
+  classification: ABIERTO                    # ABIERTO | RESTRINGIDO | CONFIDENCIAL
+
+categories:
+  - key: economy
+    label_es: "Economía"
+    prompt_key: economic
+  - key: security
+    label_es: "Seguridad Interior"
+    prompt_key: security
+  - key: defense
+    label_es: "Defensa"
+    prompt_key: defense
+  - key: intelligence
+    label_es: "Inteligencia"
+    prompt_key: intelligence
 
 countries:
   - name: United States
@@ -46,8 +65,14 @@ countries:
     code: IN
   - name: Pakistan
     code: PK
+  - name: Iran
+    code: IR
+  - name: Turkey
+    code: TR
   - name: Saudi Arabia
     code: SA
+  - name: Israel
+    code: IL
   - name: Egypt
     code: EG
   - name: South Africa

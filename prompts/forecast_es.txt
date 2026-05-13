@@ -1,0 +1,21 @@
+Basándote en el análisis estratégico de {{ country }}, elabora una previsión en tres horizontes temporales.
+
+## Previsión a 6 meses
+- Economía: tendencia esperada con indicadores cuantitativos si es posible
+- Seguridad: escenarios de escalada o desescalada
+- Defensa: movimientos militares o ejercicios previsibles
+- Diplomacia: eventos clave (elecciones, cumbres, negociaciones)
+
+## Previsión a 1 año
+- Estabilidad política y riesgos de cambio de régimen
+- Perspectiva económica y riesgo de crisis
+- Principales vectores de amenaza para la seguridad nacional
+- Probable posicionamiento geopolítico
+
+## Previsión a 3 años
+- Tendencias estructurales: demografía, recursos, tecnología
+- Escenarios alternativos (optimista / base / pesimista)
+- Impacto en el equilibrio de poder regional
+
+## Conclusión Estratégica
+Párrafo de síntesis: posición del país en su región, vulnerabilidades críticas y oportunidades estratégicas de largo plazo.

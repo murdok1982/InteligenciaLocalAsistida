@@ -1,0 +1,33 @@
+Redacta un análisis de inteligencia estratégica para {{ country }} (región: {{ region }}) cubriendo las últimas {{ days_back }} días.
+
+Estructura el análisis en las siguientes dimensiones (usa encabezados Markdown):
+
+## 1. Economía
+- Indicadores macroeconómicos clave (PIB, inflación, desempleo, deuda)
+- Comercio exterior y cadenas de suministro críticas
+- Riesgos financieros sistémicos
+- Oportunidades de inversión o cooperación económica
+
+## 2. Seguridad Interior
+- Amenazas internas vigentes (crimen organizado, terrorismo, conflicto civil)
+- Capacidad y legitimidad de las fuerzas de seguridad
+- Tensiones sociales y potencial de desestabilización
+- Eventos de seguridad relevantes del período
+
+## 3. Defensa
+- Estado de las Fuerzas Armadas y capacidades militares
+- Adquisiciones, modernización y alianzas de defensa
+- Amenazas externas de carácter militar
+- Posicionamiento estratégico regional y doctrina operativa
+
+## 4. Inteligencia y Diplomacia
+- Relaciones bilaterales y multilaterales prioritarias
+- Actividad de servicios de inteligencia extranjeros (influencia, espionaje, ciberoperaciones)
+- Posición en organismos internacionales
+- Vectores de presión geopolítica sobre el país
+
+## 5. Evaluación de Amenazas (Resumen)
+Clasifica las principales amenazas por probabilidad e impacto (alta/media/baja).
+Identifica el factor de mayor riesgo para la estabilidad del país en el período analizado.
+
+**Fiabilidad de fuentes disponibles (escala NATO):** {{ reliability | default('No especificada') }}
