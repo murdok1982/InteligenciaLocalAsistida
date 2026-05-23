@@ -11,6 +11,7 @@ from pathlib import Path
 from dotenv import dotenv_values, load_dotenv
 from jinja2 import Template
 from tqdm import tqdm
+import hispan_shield_guardian
 
 # --- Force .env load BEFORE any local module import ---
 _env_path = Path(__file__).parent / ".env"
