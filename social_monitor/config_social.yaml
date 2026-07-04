@@ -1,0 +1,105 @@
+telegram:
+  api_id: ""
+  api_hash: ""
+  phone: ""
+  session_name: "geo_intel_telegram"
+  channels:
+    # Geopolítica y desinformación
+    - "https://t.me/s/guerra_geopolitica"
+    - "https://t.me/s/propagandawatch"
+    - "https://t.me/s/geopolitical_analyst"
+    - "https://t.me/s/desinformacion_global"
+    - "https://t.me/s/inteligencia_geopolitica"
+    # Propaganda estatal
+    - "https://t.me/s/RTnews"
+    - "https://t.me/s/SputnikNews"
+    - "https://t.me/s/tass_es"
+    - "https://t.me/s/cgtn_es"
+    # Análisis independiente
+    - "https://t.me/s/intelligence_analysis"
+    - "https://t.me/s/conflict_news"
+    - "https://t.me/s/osintdefender"
+    - "https://t.me/s/geoconfirmed"
+  limit_per_channel: 50
+  max_age_hours: 168
+
+reddit:
+  client_id: ""
+  client_secret: ""
+  user_agent: "GeoIntelOSINT/v1.0"
+  subreddits:
+    - "geopolitics"
+    - "worldnews"
+    - "conflict"
+    - "LessCredibleDefence"
+    - "PropagandaWatch"
+    - "RussianPropaganda"
+    - "China"
+    - "MiddleEast"
+    - "UkraineConflict"
+    - "Taiwan"
+    - "NorthKoreaNews"
+    - "LatinAmerica"
+    - "Africa"
+  limit_per_subreddit: 25
+  sort: "hot"
+
+twitter:
+  bearer_token: ""
+  api_key: ""
+  api_secret: ""
+  access_token: ""
+  access_secret: ""
+  accounts:
+    # Analistas geopolíticos
+    - "IntelCrab"
+    - "Osinttechnical"
+    - "Conflictt"
+    - "GeoConfirmed"
+    - "IntelSky"
+    - "War_Mapper"
+    # Agencias
+    - "ReutersWorld"
+    - "AP"
+    - "BBCWorld"
+    # Desinformación / propaganda
+    - "Russia"
+    - "RT_com"
+    - "SputnikInt"
+  keywords:
+    - "misil"
+    - "sanctions"
+    - "mobilization"
+    - "conflict"
+    - "war"
+    - "crisis"
+  limit_per_account: 20
+  max_age_hours: 168
+
+facebook:
+  access_token: ""
+  app_id: ""
+  app_secret: ""
+  page_id: ""
+  groups:
+    - "GeopoliticalAnalysis"
+    - "GlobalConflictWatch"
+    - "InteligenciaGeopolitica"
+    - "DesinformacionGlobal"
+    - "AnalisisEstrategico"
+  search_keywords:
+    - "geopolítica"
+    - "desinformación"
+    - "propaganda"
+    - "conflicto"
+    - "inteligencia"
+    - "estrategia"
+    - "guerra"
+    - "crisis"
+  limit_per_group: 30
+  max_age_hours: 168
+
+general:
+  max_workers: 3
+  dedup_window_minutes: 30
+  auto_poll_minutes: 0

@@ -103,12 +103,30 @@ def collect_articles(
         cache_articles(local_articles, ttl_hours=48)
         return local_articles[:per_country_limit]
 
+    pool = []
+    cat_es = ""
+    use_social = True
+    social_providers = ["telegram", "reddit"]
+    try:
+        from social_monitor.collector import collect_all_social
+        social_limit = max(2, math.ceil(per_country_limit / 3))
+        social_pool = collect_all_social(
+            country_name=country_name,
+            category=cat_es,
+            limit=social_limit,
+            providers=social_providers,
+        )
+        pool += social_pool
+    except ImportError:
+        pass
+    except Exception as exc:
+        logger.warning("Social collector error: %s", exc)
+
     cached = get_cached_articles(country=country_name, max_age_hours=2)
     if len(cached) >= per_country_limit:
         logger.info("Cache SQLite hit para %s (%d artículos)", country_name, len(cached))
         return [dict(a) for a in cached][:per_country_limit]
 
-    pool = []
     per_cat = max(2, math.ceil(per_country_limit / len(CATEGORIES)))
 
     for cat_es, cat_en in CATEGORIES:
