@@ -520,12 +520,14 @@ def build_context_prompt(
     lines.append("=" * 50)
     for i, a in enumerate(articles, 1):
         similarity = a.get("similarity_score", 0)
-        lines.append(f"\n--- Fuente #{i} (similitud: {similarity:.2f}) ---")
-        lines.append(f"Título: {a.get('title', 'N/A')}")
+        lines.append(f"\n--- Fuente #{i} (similitud: {similarity:.2f}) [ID:{i}] ---")
+        lines.append(f"Titulo: {a.get('title', 'N/A')}")
         lines.append(f"URL: {a.get('url', 'N/A')}")
         lines.append(f"Contenido: {a.get('summary', '')[:500]}")
     lines.append("\n" + "=" * 50)
+    lines.append("INSTRUCCION DE CITAS: Cualquier afirmacion categorica que hagas debe incluir al final el numero de fuente entre corchetes, ej. [Fuente #1]. Asi el analista puede verificar el origen.")
     lines.append("Usa este contexto obtenido por similitud semantica como base para tu analisis.")
+    lines.append("Cuando menciones un dato especifico, INDICA siempre de que fuente proviene usando [Fuente #N].")
     return "\n".join(lines)
 
 

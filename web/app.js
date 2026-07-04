@@ -35,6 +35,45 @@ function authHeaders() {
   };
 }
 
+let airGapped = false;
+
+document.getElementById('airGappedToggle')?.addEventListener('click', async () => {
+  airGapped = !airGapped;
+  const btn = document.getElementById('airGappedToggle');
+  const status = document.getElementById('cfgAirGappedStatus');
+  if (btn) btn.textContent = airGapped ? 'Desactivar' : 'Activar';
+  if (status) {
+    status.textContent = airGapped ? 'ACTIVADO — Sin conexion externa' : 'Desactivado';
+    document.getElementById('airGappedStatus').style.display = 'flex';
+  }
+  try {
+    await fetch('/api/config', {
+      method: 'PUT',
+      headers: authHeaders(),
+      body: JSON.stringify({ air_gapped: airGapped })
+    });
+  } catch (e) {}
+});
+
+document.getElementById('importFile')?.addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const formData = new FormData();
+  formData.append('file', file);
+  try {
+    const res = await fetch('/api/import', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${apiToken || sessionToken}` },
+      body: formData,
+    });
+    const data = await res.json();
+    alert(data.ok ? 'Archivo importado correctamente' : 'Error: ' + (data.error || ''));
+  } catch (err) {
+    alert('Error de conexion: ' + err.message);
+  }
+  e.target.value = '';
+});
+
 async function fetchToken() {
   try {
     const res = await fetch('/api/token');
@@ -298,9 +337,25 @@ async function launchPipeline() {
   stopPipelinePolling();
 
   try {
+    const selectedCountries = getSelectedCountries();
+    if (selectedCountries.length === 0) {
+      pipelineStatus.textContent = 'Selecciona al menos un pais.';
+      pipelineBtn.disabled = false;
+      return;
+    }
+    progressText.textContent = `Preparando analisis de ${selectedCountries.length} paises...`;
+
+    const days = document.getElementById('daysSelect').value;
+    const classification = document.getElementById('classSelect').value;
+
     const res = await fetch('/api/pipeline', {
       method: 'POST',
       headers: authHeaders(),
+      body: JSON.stringify({
+        countries: selectedCountries,
+        days: parseInt(days),
+        classification: classification,
+      }),
     });
 
     if (!res.ok) {
@@ -326,6 +381,7 @@ async function launchPipeline() {
 }
 
 let pipelinePollInterval = null;
+let watchdogInterval = null;
 
 function startPipelinePolling() {
   if (pipelinePollInterval) clearInterval(pipelinePollInterval);
@@ -371,6 +427,84 @@ function stopPipelinePolling() {
     pipelinePollInterval = null;
   }
 }
+
+function startWatchdogPolling() {
+  if (watchdogInterval) clearInterval(watchdogInterval);
+  watchdogInterval = setInterval(async () => {
+    try {
+      const res = await fetch('/api/watchdog/alerts?minutes=60', { headers: authHeaders() });
+      const data = await res.json();
+      if (data.ok && data.alerts && data.alerts.length > 0) {
+        const alertCount = document.getElementById('alertCount');
+        if (alertCount) alertCount.textContent = data.alerts.length;
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+          let banner = sidebar.querySelector('.alert-banner');
+          if (!banner) {
+            banner = document.createElement('div');
+            banner.className = 'alert-banner';
+            banner.innerHTML = `<span class="alert-icon">&#x26A0;</span> <span id="alertCount">${data.alerts.length}</span> alertas`;
+            banner.onclick = () => {
+              const alertsHtml = data.alerts.map(a => 
+                `<div class="alert-item"><strong>${a.region || '?'}</strong>: ${a.title.substring(0, 100)}<br><small>${(a.triggers || []).join(', ')}</small></div>`
+              ).join('');
+              alert(`ALERTAS DETECTADAS:\n\n${data.alerts.map(a => `[${a.region}] ${a.title.substring(0, 80)}`).join('\n\n')}`);
+            };
+            sidebar.insertBefore(banner, sidebar.querySelector('.sidebar-footer'));
+          } else {
+            const countSpan = banner.querySelector('#alertCount');
+            if (countSpan) countSpan.textContent = data.alerts.length;
+          }
+        }
+      }
+    } catch (e) {}
+  }, 30000);
+}
+
+const COUNTRIES = [
+  "Argentina", "Australia", "Bangladesh", "Brasil", "Canada", "Chile",
+  "China", "Colombia", "Egipto", "Etiopia", "Francia", "Alemania",
+  "India", "Iran", "Israel", "Italia", "Japon", "Kenia",
+  "Mexico", "Nigeria", "Nueva Zelanda", "Pakistan", "Polonia",
+  "Rusia", "Arabia Saudita", "Sudafrica", "Corea del Sur", "Espana",
+  "Taiwan", "Turquia", "Ucrania", "Reino Unido", "Estados Unidos",
+];
+
+function buildCountryGrid() {
+  const grid = document.getElementById('countryGrid');
+  if (!grid) return;
+  grid.innerHTML = COUNTRIES.map(c => `
+    <label class="country-chip">
+      <input type="checkbox" value="${c}" checked />
+      <span class="chip-label">${c}</span>
+    </label>
+  `).join('');
+  updateSelectedCount();
+}
+
+function getSelectedCountries() {
+  const checks = document.querySelectorAll('#countryGrid input[type="checkbox"]:checked');
+  return Array.from(checks).map(c => c.value);
+}
+
+function updateSelectedCount() {
+  const el = document.getElementById('selectedCount');
+  if (el) el.textContent = `${getSelectedCountries().length} seleccionados`;
+}
+
+document.addEventListener('change', (e) => {
+  if (e.target.closest('#countryGrid')) updateSelectedCount();
+});
+
+document.getElementById('selectAllBtn')?.addEventListener('click', () => {
+  document.querySelectorAll('#countryGrid input[type="checkbox"]').forEach(c => c.checked = true);
+  updateSelectedCount();
+});
+
+document.getElementById('selectNoneBtn')?.addEventListener('click', () => {
+  document.querySelectorAll('#countryGrid input[type="checkbox"]').forEach(c => c.checked = false);
+  updateSelectedCount();
+});
 
 async function loadReports() {
   const list = document.getElementById('reportsList');
@@ -494,6 +628,9 @@ async function loadConfig() {
       cfgProviderSelect.value = data.provider;
       apiKeyField.style.display = data.provider === 'openai' ? 'flex' : 'none';
     }
+
+    const cfgAirGapped = document.getElementById('cfgAirGapped');
+    if (cfgAirGapped) cfgAirGapped.textContent = data.air_gapped ? 'ACTIVADO' : 'Desactivado';
   } catch {
     document.getElementById('cfgProvider').textContent = 'Error';
   }
@@ -523,4 +660,6 @@ promptInput.addEventListener('keydown', (event) => {
 fetchToken().then(() => {
   checkStatus();
   loadModels();
+  startWatchdogPolling();
+  buildCountryGrid();
 });

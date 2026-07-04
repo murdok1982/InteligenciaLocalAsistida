@@ -33,6 +33,9 @@ from utils.database import (
 )
 from utils.llm import LLM_PROVIDER, OLLAMA_MODEL, ask_model, ask_model_stream, get_ollama_tags
 
+_watchdog_stop: threading.Event | None = None
+_watchdog_thread: threading.Thread | None = None
+
 SESSION_TOKEN = secrets.token_urlsafe(32)
 
 WEB_ROOT = ROOT / "web"
@@ -85,7 +88,7 @@ def _emit_pipeline_event(event: dict) -> None:
         _pipeline_events.append(event)
 
 
-def _run_pipeline_background():
+def _run_pipeline_background(countries=None, days_back=7, classification="ABIERTO"):
     try:
         with _pipeline_lock:
             _pipeline_state["status"] = "running"
@@ -94,7 +97,7 @@ def _run_pipeline_background():
             _pipeline_state["progress"] = 0
             _pipeline_state["current_country"] = ""
             _pipeline_state["current_phase"] = "recolectando"
-            _pipeline_state["total_countries"] = 23
+            _pipeline_state["total_countries"] = len(countries) if countries else 23
 
         _emit_pipeline_event({"type": "start", "message": "Pipeline iniciado"})
 
@@ -115,7 +118,7 @@ def _run_pipeline_background():
                     _pipeline_state["current_phase"] = "completado"
 
         from main import main as pipeline_main
-        pipeline_main(progress_callback=progress_wrapper)
+        pipeline_main(progress_callback=progress_wrapper, countries=countries, days_back=days_back, classification=classification)
 
         _emit_pipeline_event({"type": "complete", "message": "Pipeline completado"})
 
@@ -316,6 +319,15 @@ class AppHandler(BaseHTTPRequestHandler):
             self._handle_pipeline_stream()
             return
 
+        if path == "/api/watchdog/alerts":
+            if not self._check_auth():
+                self._send_json({"error": "unauthorized"}, 401)
+                return
+            from watchdog import get_recent_alerts
+            alerts = get_recent_alerts(minutes=int(self._get_query_param("minutes") or "60"))
+            self._send_json({"ok": True, "alerts": alerts})
+            return
+
         if path == "/api/models":
             if not self._check_auth():
                 self._send_json({"error": "unauthorized"}, 401)
@@ -386,11 +398,15 @@ class AppHandler(BaseHTTPRequestHandler):
         new_model = data.get("model")
         new_provider = data.get("provider")
 
-        if not new_model and not new_provider:
+        import utils.llm as llm_module
+
+        if "air_gapped" in data:
+            air_gapped = data["air_gapped"]
+            logger.info("Air-Gapped mode set to: %s", air_gapped)
+
+        if not new_model and not new_provider and "air_gapped" not in data:
             self._send_json({"error": "se_requiere_model_o_provider"}, 400)
             return
-
-        import utils.llm as llm_module
 
         if new_provider:
             if new_provider not in ("ollama", "openai", "auto"):
@@ -405,7 +421,36 @@ class AppHandler(BaseHTTPRequestHandler):
             "ok": True,
             "model": llm_module.OLLAMA_MODEL,
             "provider": llm_module.LLM_PROVIDER,
+            "air_gapped": data.get("air_gapped", False),
         })
+
+    def _handle_import(self):
+        content_type = self.headers.get("Content-Type", "")
+        if "multipart/form-data" not in content_type:
+            self._send_json({"error": "multipart_required"}, 400)
+            return
+        try:
+            import cgi
+            form = cgi.FieldStorage(
+                fp=self.rfile,
+                headers=self.headers,
+                environ={"REQUEST_METHOD": "POST"},
+            )
+            file_item = form["file"]
+            if not file_item.filename:
+                self._send_json({"error": "no_file"}, 400)
+                return
+            safe_name = os.path.basename(file_item.filename)
+            import_dir = ROOT / "imports"
+            os.makedirs(import_dir, exist_ok=True)
+            dest = import_dir / safe_name
+            with open(dest, "wb") as f:
+                f.write(file_item.file.read())
+            logger.info("Archivo importado: %s", dest)
+            self._send_json({"ok": True, "filename": safe_name, "size": dest.stat().st_size})
+        except Exception as exc:
+            logger.error("Error importando archivo: %s", exc)
+            self._send_json({"error": str(exc)}, 500)
 
     def _handle_pipeline_stream(self):
         with _pipeline_events_lock:
@@ -480,6 +525,10 @@ class AppHandler(BaseHTTPRequestHandler):
 
         if path == "/api/pipeline":
             self._handle_pipeline()
+            return
+
+        if path == "/api/import":
+            self._handle_import()
             return
 
         self._send_json({"error": "not_found"}, 404)
@@ -651,6 +700,14 @@ class AppHandler(BaseHTTPRequestHandler):
         })
 
     def _handle_pipeline(self):
+        data, err = self._read_json_body()
+        if err:
+            data = {}
+
+        countries = data.get("countries") if isinstance(data, dict) else None
+        days_back = int(data.get("days", 7)) if isinstance(data, dict) else 7
+        classification = data.get("classification", "ABIERTO") if isinstance(data, dict) else "ABIERTO"
+
         with _pipeline_lock:
             if _pipeline_state["running"]:
                 self._send_json({"error": "pipeline_already_running"}, 409)
@@ -660,13 +717,17 @@ class AppHandler(BaseHTTPRequestHandler):
             _pipeline_state["started_at"] = None
             _pipeline_state["finished_at"] = None
             _pipeline_state["error"] = None
+            _pipeline_state["progress"] = 0
+            _pipeline_state["current_country"] = ""
+            _pipeline_state["total_countries"] = len(countries) if countries else 23
+            _pipeline_state["current_phase"] = "iniciando"
 
-        t = threading.Thread(target=_run_pipeline_background, daemon=True)
+        t = threading.Thread(target=_run_pipeline_background, args=(countries, days_back, classification), daemon=True)
         with _pipeline_lock:
             _pipeline_state["thread"] = t
         t.start()
 
-        self._send_json({"ok": True, "status": "started"})
+        self._send_json({"ok": True, "status": "started", "countries": countries or "all"})
 
     def log_message(self, format, *args):
         return
@@ -724,6 +785,9 @@ def run_server(host: str = "127.0.0.1", port: int = 8765):
     _server_port = port
     init_db()
     _load_schedules_from_db()
+    from watchdog import start_watchdog
+    global _watchdog_stop, _watchdog_thread
+    _watchdog_stop, _watchdog_thread = start_watchdog()
     server = ThreadingHTTPServer((host, port), AppHandler)
     print(f"\nInterfaz local lista en http://{host}:{port}?token={SESSION_TOKEN}")
     print(f"Modelo configurado: {OLLAMA_MODEL}")

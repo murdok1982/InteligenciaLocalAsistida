@@ -70,6 +70,39 @@ def collect_articles(
     use_rss: bool,
     use_youtube: bool,
 ) -> list:
+    import yaml
+    try:
+        with open("config.yaml") as f:
+            cfg_air = yaml.safe_load(f)
+        air_gapped = cfg_air.get("air_gapped", {}).get("enabled", False)
+    except Exception:
+        air_gapped = False
+
+    if air_gapped:
+        logger.info("MODO AIR-GAPPED activado — solo fuentes locales")
+        local_articles = []
+        import_dir = cfg_air.get("air_gapped", {}).get("data_import_dir", "imports") if 'cfg_air' in dir() else "imports"
+        import_path = Path(__file__).parent / import_dir
+        if import_path.exists():
+            for fpath in import_path.glob("*.*"):
+                try:
+                    text = fpath.read_text(encoding="utf-8", errors="replace")
+                    local_articles.append({
+                        "title": fpath.stem,
+                        "url": fpath.name,
+                        "source": "local_import",
+                        "date": datetime.fromtimestamp(fpath.stat().st_mtime).isoformat(),
+                        "summary": text[:500],
+                        "content": text,
+                        "provider": "local",
+                        "reliability": "B",
+                    })
+                except Exception:
+                    continue
+        logger.info("Air-gapped: %d articulos locales cargados", len(local_articles))
+        cache_articles(local_articles, ttl_hours=48)
+        return local_articles[:per_country_limit]
+
     cached = get_cached_articles(country=country_name, max_age_hours=2)
     if len(cached) >= per_country_limit:
         logger.info("Cache SQLite hit para %s (%d artículos)", country_name, len(cached))
@@ -242,6 +275,29 @@ def _analyze_country(
         logger.error("Error en forecast LLM para %s: %s", name, exc)
         forecast_text = f"(Error generando previsión para {name}: {exc})"
 
+    contradiction_matrix = ""
+    try:
+        contradiction_prompt = read_prompt("prompts/contradiction_es.txt")
+        contradiction_prompt = Template(contradiction_prompt).render(country=name)
+
+        _STATE_MEDIA_KEYWORDS = ["tass", "rt.com", "xinhua", "presstv", "cgtn", "sputnik", "fars", "irna", "kremlin", "gov.cn"]
+        western_articles = [a for a in articles if not any(kw in (a.get("source", "") + a.get("url", "")).lower() for kw in _STATE_MEDIA_KEYWORDS)]
+        state_articles = [a for a in articles if any(kw in (a.get("source", "") + a.get("url", "")).lower() for kw in _STATE_MEDIA_KEYWORDS)]
+
+        context_parts = []
+        if western_articles:
+            context_parts.append("OCCIDENTE:\n" + format_bullets(western_articles[:5]))
+        if state_articles:
+            context_parts.append("BLOQUE ADVERSARIO:\n" + format_bullets(state_articles[:5]))
+
+        if context_parts:
+            contradiction_matrix = ask_model(
+                contradiction_prompt + "\n\n" + "\n\n".join(context_parts),
+                temperature=0.3,
+            )
+    except Exception as exc:
+        logger.warning("Matriz de contradicciones no disponible para %s: %s", name, exc)
+
     reliability_score = None
     try:
         report = grade_reliability(analysis_text, articles)
@@ -250,7 +306,10 @@ def _analyze_country(
     except Exception as exc:
         logger.warning("Error evaluando fiabilidad para %s: %s", name, exc)
 
-    section_es = build_country_section(name, region, analysis_text, forecast_text, reliability_score)
+    contradiction_section = ""
+    if contradiction_matrix:
+        contradiction_section = f"\n\n### Matriz de Contradicciones\n{contradiction_matrix}\n"
+    section_es = build_country_section(name, region, analysis_text + contradiction_section, forecast_text, reliability_score)
 
     try:
         section_en = ask_model(
@@ -275,14 +334,21 @@ def _analyze_country(
         "region": region,
         "section_es": section_es,
         "section_en": section_en,
+        "source_articles": articles,
     }
 
 
-def main(progress_callback=None) -> None:
+def main(progress_callback=None, countries: list[str] = None, days_back: int = None, classification: str = None) -> None:
     _setup_logging()
     init_db()
 
     cfg = load_config("config.yaml")
+    if days_back is not None:
+        cfg["run"]["days_back"] = days_back
+    if classification is not None:
+        cfg["report"]["classification"] = classification
+    if countries is not None:
+        cfg["countries"] = [c for c in cfg["countries"] if c["name"] in countries]
     days_back = cfg["run"]["days_back"]
     per_country_limit = cfg["run"]["per_country_limit"]
     providers = cfg["run"]["providers"]
@@ -324,6 +390,7 @@ def main(progress_callback=None) -> None:
     country_sections_es: list[str] = []
     country_sections_en: list[str] = []
     region_blobs_es: dict[str, list[str]] = {}
+    articles_used_for_citation: list[dict] = []
 
     max_workers = min(4, len(cfg["countries"]))
     logger.info("Iniciando análisis paralelo de países (max_workers=%d)", max_workers)
@@ -361,6 +428,7 @@ def main(progress_callback=None) -> None:
         country_sections_es.append(r["section_es"])
         country_sections_en.append(r["section_en"])
         region_blobs_es.setdefault(r["region"], []).append(r["section_es"])
+        articles_used_for_citation.extend(r.get("source_articles", []))
 
     logger.info("Análisis de países completado. Iniciando síntesis regional...")
 
@@ -444,6 +512,15 @@ def main(progress_callback=None) -> None:
         global_overview_en=global_overview_en,
     )
 
+    try:
+        citation_lines = ["\n\n---\n## INDICE DE FUENTES\n"]
+        for i, a in enumerate(articles_used_for_citation or [], 1):
+            citation_lines.append(f"{i}. [{a.get('title', 'Sin titulo')}]({a.get('url', '#')}) — {a.get('source', '')}")
+        if citation_lines:
+            report_md += "\n".join(citation_lines)
+    except Exception:
+        pass
+
     fname = f"{cfg['report']['filename_prefix']}_{ts_stamp()}.md"
     out_path = os.path.join(output_dir, fname)
     save_text(out_path, report_md)
@@ -458,6 +535,19 @@ def main(progress_callback=None) -> None:
         classification=classification,
         file_size=file_size,
     )
+
+    try:
+        from utils.export import export_structured_report
+        json_path = export_structured_report(
+            results,
+            out_path,
+            classification=classification,
+            llm_provider=LLM_PROVIDER,
+            llm_model=llm_model_label,
+        )
+        logger.info("Reporte estructurado: %s", json_path)
+    except Exception as exc:
+        logger.warning("Error exportando JSON estructurado: %s", exc)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,17 @@
+Genera una MATRIZ DE CONTRADICCIONES para {{ country }} basada en las siguientes fuentes divididas por bloque geopolítico.
+
+## Narrativa Bloque Occidental (fuentes OTAN/aliados)
+Extrae los puntos clave de las fuentes occidentales (reliability A/B). Identifica su postura oficial, supuestos y omisiones.
+
+## Narrativa Bloque Adversario (fuentes estatales controladas)
+Extrae los puntos clave de fuentes state_controlled (TASS, RT, Xinhua, PressTV, etc.). Identifica su narrativa alternativa, desmentidos y contraacusaciones.
+
+## Discrepancia Crítica
+Compara ambas narrativas y responde:
+- ¿En qué puntos coinciden?
+- ¿Qué afirma un bloque que el otro omite deliberadamente?
+- ¿Hay evidencia de operación de influencia / desinformación?
+- ¿Cuál es el hecho objetivamente verificable (si existe)?
+
+## Evaluación de Fiabilidad
+Valora del 1 al 10 qué bloque está más cerca de los hechos comprobables y por qué.

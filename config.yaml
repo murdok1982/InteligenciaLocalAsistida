@@ -77,3 +77,7 @@ countries:
     code: NG
   - name: Australia
     code: AU
+
+air_gapped:
+  enabled: false
+  data_import_dir: "imports"
