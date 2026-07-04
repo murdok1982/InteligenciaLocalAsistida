@@ -3,7 +3,11 @@
     {
       "name": "Reuters World",
       "url": "https://feeds.reuters.com/reuters/worldNews",
-      "categories": ["general", "diplomacy", "economy"],
+      "categories": [
+        "general",
+        "diplomacy",
+        "economy"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -11,7 +15,10 @@
     {
       "name": "Reuters Business",
       "url": "https://feeds.reuters.com/reuters/businessNews",
-      "categories": ["economy", "finance"],
+      "categories": [
+        "economy",
+        "finance"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -19,7 +26,11 @@
     {
       "name": "BBC World News",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
-      "categories": ["general", "diplomacy", "security"],
+      "categories": [
+        "general",
+        "diplomacy",
+        "security"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -27,7 +38,11 @@
     {
       "name": "BBC Mundo",
       "url": "https://feeds.bbci.co.uk/mundo/rss.xml",
-      "categories": ["general", "diplomacy", "economy"],
+      "categories": [
+        "general",
+        "diplomacy",
+        "economy"
+      ],
       "region": "América Latina",
       "language": "es",
       "reliability": "A"
@@ -35,7 +50,11 @@
     {
       "name": "Al Jazeera English",
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
-      "categories": ["general", "security", "diplomacy"],
+      "categories": [
+        "general",
+        "security",
+        "diplomacy"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -43,7 +62,11 @@
     {
       "name": "France 24 Español",
       "url": "https://www.france24.com/es/rss",
-      "categories": ["general", "diplomacy", "economy"],
+      "categories": [
+        "general",
+        "diplomacy",
+        "economy"
+      ],
       "region": "Global",
       "language": "es",
       "reliability": "A"
@@ -51,7 +74,11 @@
     {
       "name": "DW Español",
       "url": "https://rss.dw.com/rdf/rss-es-all",
-      "categories": ["general", "economy", "diplomacy"],
+      "categories": [
+        "general",
+        "economy",
+        "diplomacy"
+      ],
       "region": "Global",
       "language": "es",
       "reliability": "A"
@@ -59,7 +86,11 @@
     {
       "name": "The Guardian World",
       "url": "https://www.theguardian.com/world/rss",
-      "categories": ["general", "diplomacy", "security"],
+      "categories": [
+        "general",
+        "diplomacy",
+        "security"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -67,7 +98,11 @@
     {
       "name": "Financial Times",
       "url": "https://www.ft.com/rss/home/us",
-      "categories": ["economy", "finance", "geopolitics"],
+      "categories": [
+        "economy",
+        "finance",
+        "geopolitics"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -75,7 +110,11 @@
     {
       "name": "RAND Corporation",
       "url": "https://www.rand.org/pubs/rss.xml",
-      "categories": ["defense", "intelligence", "security"],
+      "categories": [
+        "defense",
+        "intelligence",
+        "security"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -83,7 +122,11 @@
     {
       "name": "SIPRI",
       "url": "https://www.sipri.org/rss.xml",
-      "categories": ["defense", "security", "disarmament"],
+      "categories": [
+        "defense",
+        "security",
+        "disarmament"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -91,7 +134,11 @@
     {
       "name": "Chatham House",
       "url": "https://www.chathamhouse.org/rss.xml",
-      "categories": ["geopolitics", "diplomacy", "defense"],
+      "categories": [
+        "geopolitics",
+        "diplomacy",
+        "defense"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -99,7 +146,11 @@
     {
       "name": "Council on Foreign Relations",
       "url": "https://www.cfr.org/rss/publications",
-      "categories": ["diplomacy", "geopolitics", "security"],
+      "categories": [
+        "diplomacy",
+        "geopolitics",
+        "security"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -107,7 +158,11 @@
     {
       "name": "Brookings Institution",
       "url": "https://www.brookings.edu/feed/",
-      "categories": ["economy", "diplomacy", "security"],
+      "categories": [
+        "economy",
+        "diplomacy",
+        "security"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -115,7 +170,11 @@
     {
       "name": "IISS",
       "url": "https://www.iiss.org/rss",
-      "categories": ["defense", "security", "military"],
+      "categories": [
+        "defense",
+        "security",
+        "military"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -123,7 +182,10 @@
     {
       "name": "ISS Africa",
       "url": "https://issafrica.org/rss",
-      "categories": ["security", "defense"],
+      "categories": [
+        "security",
+        "defense"
+      ],
       "region": "África Subsahariana",
       "language": "en",
       "reliability": "A"
@@ -131,7 +193,11 @@
     {
       "name": "Jane's 360",
       "url": "https://www.janes.com/feeds/news",
-      "categories": ["defense", "military", "intelligence"],
+      "categories": [
+        "defense",
+        "military",
+        "intelligence"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -139,7 +205,10 @@
     {
       "name": "Defense News",
       "url": "https://www.defensenews.com/arc/outboundfeeds/rss/",
-      "categories": ["defense", "military"],
+      "categories": [
+        "defense",
+        "military"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -147,7 +216,11 @@
     {
       "name": "War on the Rocks",
       "url": "https://warontherocks.com/feed/",
-      "categories": ["defense", "security", "intelligence"],
+      "categories": [
+        "defense",
+        "security",
+        "intelligence"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -155,7 +228,11 @@
     {
       "name": "Lawfare",
       "url": "https://www.lawfaremedia.org/rss.xml",
-      "categories": ["intelligence", "security", "law"],
+      "categories": [
+        "intelligence",
+        "security",
+        "law"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -163,7 +240,10 @@
     {
       "name": "Foreign Affairs",
       "url": "https://www.foreignaffairs.com/rss.xml",
-      "categories": ["diplomacy", "geopolitics"],
+      "categories": [
+        "diplomacy",
+        "geopolitics"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -171,7 +251,11 @@
     {
       "name": "Foreign Policy",
       "url": "https://foreignpolicy.com/feed/",
-      "categories": ["diplomacy", "geopolitics", "security"],
+      "categories": [
+        "diplomacy",
+        "geopolitics",
+        "security"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -179,7 +263,11 @@
     {
       "name": "Bellingcat",
       "url": "https://www.bellingcat.com/feed/",
-      "categories": ["intelligence", "osint", "security"],
+      "categories": [
+        "intelligence",
+        "osint",
+        "security"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "B"
@@ -187,7 +275,10 @@
     {
       "name": "The Diplomat",
       "url": "https://thediplomat.com/feed/",
-      "categories": ["diplomacy", "geopolitics"],
+      "categories": [
+        "diplomacy",
+        "geopolitics"
+      ],
       "region": "Asia Oriental",
       "language": "en",
       "reliability": "A"
@@ -195,7 +286,11 @@
     {
       "name": "Middle East Eye",
       "url": "https://www.middleeasteye.net/rss",
-      "categories": ["general", "security", "diplomacy"],
+      "categories": [
+        "general",
+        "security",
+        "diplomacy"
+      ],
       "region": "Oriente Medio",
       "language": "en",
       "reliability": "B"
@@ -203,7 +298,10 @@
     {
       "name": "RT en Español",
       "url": "https://actualidad.rt.com/rss",
-      "categories": ["general", "diplomacy"],
+      "categories": [
+        "general",
+        "diplomacy"
+      ],
       "region": "Global",
       "language": "es",
       "reliability": "C"
@@ -211,7 +309,11 @@
     {
       "name": "Xinhua English",
       "url": "http://www.xinhuanet.com/english/rss/worldrss.xml",
-      "categories": ["general", "diplomacy", "economy"],
+      "categories": [
+        "general",
+        "diplomacy",
+        "economy"
+      ],
       "region": "Asia Oriental",
       "language": "en",
       "reliability": "C"
@@ -219,7 +321,11 @@
     {
       "name": "TASS",
       "url": "http://tass.com/rss/v2.xml",
-      "categories": ["general", "diplomacy", "defense"],
+      "categories": [
+        "general",
+        "diplomacy",
+        "defense"
+      ],
       "region": "Europa del Este",
       "language": "en",
       "reliability": "C"
@@ -227,7 +333,10 @@
     {
       "name": "AP News World",
       "url": "https://apnews.com/rss/apf-intlnews",
-      "categories": ["general", "diplomacy"],
+      "categories": [
+        "general",
+        "diplomacy"
+      ],
       "region": "Global",
       "language": "en",
       "reliability": "A"
@@ -235,10 +344,2023 @@
     {
       "name": "El País Internacional",
       "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada",
-      "categories": ["general", "diplomacy", "economy"],
+      "categories": [
+        "general",
+        "diplomacy",
+        "economy"
+      ],
       "region": "Global",
       "language": "es",
       "reliability": "A"
+    },
+    {
+      "name": "The New York Times",
+      "url": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+      "categories": [
+        "newspaper",
+        "politics",
+        "breaking"
+      ],
+      "region": "Norteamérica",
+      "country": "US",
+      "language": "en",
+      "reliability": "A",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "The Washington Post",
+      "url": "https://feeds.washingtonpost.com/rss/national",
+      "categories": [
+        "newspaper",
+        "politics",
+        "investigations"
+      ],
+      "region": "Norteamérica",
+      "country": "US",
+      "language": "en",
+      "reliability": "A",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "Fox News",
+      "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
+      "categories": [
+        "cable",
+        "politics",
+        "breaking"
+      ],
+      "region": "Norteamérica",
+      "country": "US",
+      "language": "en",
+      "reliability": "B",
+      "bias": "right",
+      "notes": ""
+    },
+    {
+      "name": "The Wall Street Journal",
+      "url": "https://feeds.wsjonline.com/wsj/xml/rss/3_7085.xml",
+      "categories": [
+        "newspaper",
+        "business",
+        "politics"
+      ],
+      "region": "Norteamérica",
+      "country": "US",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Politico",
+      "url": "https://www.politico.com/rss/politicopicks.xml",
+      "categories": [
+        "politics",
+        "digital_native"
+      ],
+      "region": "Norteamérica",
+      "country": "US",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Axios",
+      "url": "https://www.axios.com/feeds/feed.xml",
+      "categories": [
+        "politics",
+        "business",
+        "digital_native"
+      ],
+      "region": "Norteamérica",
+      "country": "US",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "The Hill",
+      "url": "https://thehill.com/feed/",
+      "categories": [
+        "politics",
+        "digital_native"
+      ],
+      "region": "Norteamérica",
+      "country": "US",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "BuzzFeed News",
+      "url": "https://www.buzzfeed.com/index.xml",
+      "categories": [
+        "digital_native",
+        "politics"
+      ],
+      "region": "Norteamérica",
+      "country": "US",
+      "language": "en",
+      "reliability": "B",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "CBC News",
+      "url": "https://www.cbc.ca/webfeed/rss.xml",
+      "categories": [
+        "broadcaster",
+        "politics",
+        "national"
+      ],
+      "region": "Norteamérica",
+      "country": "CA",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "The Toronto Star",
+      "url": "https://www.thestar.com/feed",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Norteamérica",
+      "country": "CA",
+      "language": "en",
+      "reliability": "A",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "National Post",
+      "url": "https://nationalpost.com/feed",
+      "categories": [
+        "newspaper",
+        "politics",
+        "national"
+      ],
+      "region": "Norteamérica",
+      "country": "CA",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "The Globe and Mail",
+      "url": "https://www.theglobeandmail.com/arc/outboundfeeds/rss/",
+      "categories": [
+        "newspaper",
+        "business",
+        "politics"
+      ],
+      "region": "Norteamérica",
+      "country": "CA",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Global News",
+      "url": "https://globalnews.ca/feed/",
+      "categories": [
+        "digital_native",
+        "broadcaster"
+      ],
+      "region": "Norteamérica",
+      "country": "CA",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "La Jornada",
+      "url": "https://www.jornada.com.mx/rss/portada.xml",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "América Latina",
+      "country": "MX",
+      "language": "es",
+      "reliability": "B",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "El Universal",
+      "url": "https://www.eluniversal.com.mx/seccion/1671/rss.xml",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "América Latina",
+      "country": "MX",
+      "language": "es",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Reforma",
+      "url": "https://www.reforma.com/rss/portada.xml",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "América Latina",
+      "country": "MX",
+      "language": "es",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "El Financiero",
+      "url": "https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/?outputType=xml",
+      "categories": [
+        "newspaper",
+        "business",
+        "finance"
+      ],
+      "region": "América Latina",
+      "country": "MX",
+      "language": "es",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Mexico News Daily",
+      "url": "https://mexiconewsdaily.com/feed/",
+      "categories": [
+        "digital_native",
+        "english",
+        "mexico"
+      ],
+      "region": "América Latina",
+      "country": "MX",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Animal Político",
+      "url": "https://www.animalpolitico.com/feed",
+      "categories": [
+        "digital_native",
+        "politics",
+        "investigations"
+      ],
+      "region": "América Latina",
+      "country": "MX",
+      "language": "es",
+      "reliability": "B",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "Folha de S.Paulo",
+      "url": "https://feeds.folha.uol.com.br/folha/emcimaodahora/rss.xml",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "América Latina",
+      "country": "BR",
+      "language": "pt",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "O Globo",
+      "url": "https://oglobo.globo.com/rss/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "América Latina",
+      "country": "BR",
+      "language": "pt",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "O Estado de S. Paulo (Estadão)",
+      "url": "https://www.estadao.com.br/rss/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "economy"
+      ],
+      "region": "América Latina",
+      "country": "BR",
+      "language": "pt",
+      "reliability": "A",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Gazeta do Povo",
+      "url": "https://www.gazetadopovo.com.br/feed/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "América Latina",
+      "country": "BR",
+      "language": "pt",
+      "reliability": "B",
+      "bias": "right",
+      "notes": ""
+    },
+    {
+      "name": "G1 (Globo)",
+      "url": "https://g1.globo.com/rss/g1/",
+      "categories": [
+        "digital_native",
+        "breaking"
+      ],
+      "region": "América Latina",
+      "country": "BR",
+      "language": "pt",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "UOL Notícias",
+      "url": "https://noticias.uol.com.br/feed/",
+      "categories": [
+        "digital_native",
+        "politics"
+      ],
+      "region": "América Latina",
+      "country": "BR",
+      "language": "pt",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Página/12",
+      "url": "https://www.pagina12.com.ar/rss/portada.xml",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "América Latina",
+      "country": "AR",
+      "language": "es",
+      "reliability": "B",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "Tiempo Argentino",
+      "url": "https://www.tiempoar.com.ar/feed/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "América Latina",
+      "country": "AR",
+      "language": "es",
+      "reliability": "B",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "La Nación",
+      "url": "https://www.lanacion.com.ar/rss/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "economy"
+      ],
+      "region": "América Latina",
+      "country": "AR",
+      "language": "es",
+      "reliability": "A",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Ámbito Financiero",
+      "url": "https://www.ambito.com/rss/",
+      "categories": [
+        "newspaper",
+        "finance",
+        "politics"
+      ],
+      "region": "América Latina",
+      "country": "AR",
+      "language": "es",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Infobae",
+      "url": "https://www.infobae.com/feeds/rss/",
+      "categories": [
+        "digital_native",
+        "politics",
+        "world"
+      ],
+      "region": "América Latina",
+      "country": "AR",
+      "language": "es",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "The Independent",
+      "url": "https://www.independent.co.uk/news/uk/rss",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Europa Occidental",
+      "country": "GB",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "The Daily Telegraph",
+      "url": "https://www.telegraph.co.uk/rss",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Europa Occidental",
+      "country": "GB",
+      "language": "en",
+      "reliability": "A",
+      "bias": "right",
+      "notes": ""
+    },
+    {
+      "name": "The Times / The Sunday Times",
+      "url": "https://www.thetimes.co.uk/rss",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Europa Occidental",
+      "country": "GB",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Sky News",
+      "url": "https://feeds.skynews.com/feeds/rss/home.xml",
+      "categories": [
+        "broadcaster",
+        "digital_native",
+        "breaking"
+      ],
+      "region": "Europa Occidental",
+      "country": "GB",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "UnHerd",
+      "url": "https://unherd.com/feed/",
+      "categories": [
+        "digital_native",
+        "opinion",
+        "politics"
+      ],
+      "region": "Europa Occidental",
+      "country": "GB",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Le Monde",
+      "url": "https://www.lemonde.fr/rss/une.xml",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Europa Occidental",
+      "country": "FR",
+      "language": "fr",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "Libération",
+      "url": "https://www.liberation.fr/rss/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Europa Occidental",
+      "country": "FR",
+      "language": "fr",
+      "reliability": "B",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "Le Figaro",
+      "url": "https://www.lefigaro.fr/rss/figaro_une.xml",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Europa Occidental",
+      "country": "FR",
+      "language": "fr",
+      "reliability": "A",
+      "bias": "right",
+      "notes": ""
+    },
+    {
+      "name": "Les Echos",
+      "url": "https://www.lesechos.fr/rss.xml",
+      "categories": [
+        "newspaper",
+        "business",
+        "finance"
+      ],
+      "region": "Europa Occidental",
+      "country": "FR",
+      "language": "fr",
+      "reliability": "A",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Mediapart",
+      "url": "https://www.mediapart.fr/rss/",
+      "categories": [
+        "digital_native",
+        "investigations"
+      ],
+      "region": "Europa Occidental",
+      "country": "FR",
+      "language": "fr",
+      "reliability": "A",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "France Info",
+      "url": "https://www.francetvinfo.fr/titres.rss",
+      "categories": [
+        "digital_native",
+        "broadcaster",
+        "breaking"
+      ],
+      "region": "Europa Occidental",
+      "country": "FR",
+      "language": "fr",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Der Spiegel",
+      "url": "https://www.spiegel.de/schlagzeilen/index.rss",
+      "categories": [
+        "magazine",
+        "politics",
+        "world"
+      ],
+      "region": "Europa Occidental",
+      "country": "DE",
+      "language": "de",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "Süddeutsche Zeitung",
+      "url": "https://www.sueddeutsche.de/rss/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Europa Occidental",
+      "country": "DE",
+      "language": "de",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "Frankfurter Allgemeine (FAZ)",
+      "url": "https://www.faz.net/rss/aktuell/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "economy"
+      ],
+      "region": "Europa Occidental",
+      "country": "DE",
+      "language": "de",
+      "reliability": "A",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Die Welt",
+      "url": "https://www.welt.de/feeds/topnews.rss",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Europa Occidental",
+      "country": "DE",
+      "language": "de",
+      "reliability": "B",
+      "bias": "right",
+      "notes": ""
+    },
+    {
+      "name": "Zeit Online",
+      "url": "https://www.zeit.de/index.rss",
+      "categories": [
+        "digital_native",
+        "politics",
+        "opinion"
+      ],
+      "region": "Europa Occidental",
+      "country": "DE",
+      "language": "de",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "taz (die tageszeitung)",
+      "url": "https://taz.de/!rss/",
+      "categories": [
+        "digital_native",
+        "politics"
+      ],
+      "region": "Europa Occidental",
+      "country": "DE",
+      "language": "de",
+      "reliability": "B",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "Novaya Gazeta Europe",
+      "url": "https://novayagazeta.eu/api/rss",
+      "categories": [
+        "newspaper",
+        "politics",
+        "investigations"
+      ],
+      "region": "Europa del Este",
+      "country": "RU",
+      "language": "ru",
+      "reliability": "A",
+      "bias": "left",
+      "notes": "Independent, operates from exile in EU"
+    },
+    {
+      "name": "The Moscow Times",
+      "url": "https://www.themoscowtimes.com/rss/news",
+      "categories": [
+        "digital_native",
+        "english",
+        "politics"
+      ],
+      "region": "Europa del Este",
+      "country": "RU",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": "Independent English-language, operates from Netherlands"
+    },
+    {
+      "name": "TASS",
+      "url": "https://tass.com/rss/v2.xml",
+      "categories": [
+        "state_agency",
+        "politics",
+        "world"
+      ],
+      "region": "Europa del Este",
+      "country": "RU",
+      "language": "en",
+      "reliability": "C",
+      "bias": "state_controlled",
+      "notes": "Official Russian state news agency"
+    },
+    {
+      "name": "RT (Russia Today)",
+      "url": "https://www.rt.com/rss/",
+      "categories": [
+        "state_broadcaster",
+        "politics",
+        "world"
+      ],
+      "region": "Europa del Este",
+      "country": "RU",
+      "language": "en",
+      "reliability": "C",
+      "bias": "state_controlled",
+      "notes": "Russian state-funded international broadcaster"
+    },
+    {
+      "name": "Meduza",
+      "url": "https://meduza.io/rss/all",
+      "categories": [
+        "digital_native",
+        "politics",
+        "english"
+      ],
+      "region": "Europa del Este",
+      "country": "RU",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": "Independent Russian news outlet, operates from Latvia"
+    },
+    {
+      "name": "Ukrainska Pravda",
+      "url": "https://www.pravda.com.ua/rss/",
+      "categories": [
+        "digital_native",
+        "politics",
+        "breaking"
+      ],
+      "region": "Europa del Este",
+      "country": "UA",
+      "language": "uk",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "The Kyiv Independent",
+      "url": "https://kyivindependent.com/news-archive/rss/",
+      "categories": [
+        "digital_native",
+        "english",
+        "politics",
+        "war"
+      ],
+      "region": "Europa del Este",
+      "country": "UA",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Euromaidan Press",
+      "url": "https://euromaidanpress.com/feed/",
+      "categories": [
+        "digital_native",
+        "english",
+        "politics"
+      ],
+      "region": "Europa del Este",
+      "country": "UA",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Interfax-Ukraine",
+      "url": "https://interfax.com.ua/news/general/rss.xml",
+      "categories": [
+        "wire",
+        "business",
+        "politics"
+      ],
+      "region": "Europa del Este",
+      "country": "UA",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Xinhua News Agency",
+      "url": "https://english.news.cn/rss/latestnews.xml",
+      "categories": [
+        "state_agency",
+        "world",
+        "politics"
+      ],
+      "region": "Asia Oriental",
+      "country": "CN",
+      "language": "en",
+      "reliability": "C",
+      "bias": "state_controlled",
+      "notes": "Official Chinese state news agency"
+    },
+    {
+      "name": "Global Times",
+      "url": "https://www.globaltimes.cn/rss/index.xml",
+      "categories": [
+        "state_media",
+        "politics",
+        "world"
+      ],
+      "region": "Asia Oriental",
+      "country": "CN",
+      "language": "en",
+      "reliability": "C",
+      "bias": "state_controlled",
+      "notes": "Run by the Chinese Communist Party"
+    },
+    {
+      "name": "South China Morning Post",
+      "url": "https://www.scmp.com/rss/91/feed",
+      "categories": [
+        "newspaper",
+        "china",
+        "asia"
+      ],
+      "region": "Asia Oriental",
+      "country": "CN",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": "Hong Kong-based, owned by Alibaba, increasingly cautious on China coverage"
+    },
+    {
+      "name": "Caixin",
+      "url": "https://www.caixinglobal.com/rss/top.xml",
+      "categories": [
+        "digital_native",
+        "business",
+        "finance"
+      ],
+      "region": "Asia Oriental",
+      "country": "CN",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": "Independent business/finance news, occasionally censored"
+    },
+    {
+      "name": "Asahi Shimbun",
+      "url": "https://www.asahi.com/rss/asahi/newsheadline.rdf",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Asia Oriental",
+      "country": "JP",
+      "language": "ja",
+      "reliability": "A",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "Mainichi Shimbun",
+      "url": "https://mainichi.jp/rss/etc/mainichi-flash.rss",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Asia Oriental",
+      "country": "JP",
+      "language": "ja",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "Yomiuri Shimbun",
+      "url": "https://www.yomiuri.co.jp/rss/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Asia Oriental",
+      "country": "JP",
+      "language": "ja",
+      "reliability": "A",
+      "bias": "right",
+      "notes": ""
+    },
+    {
+      "name": "Nikkei (日本経済新聞)",
+      "url": "https://www.nikkei.com/rss/",
+      "categories": [
+        "newspaper",
+        "business",
+        "finance"
+      ],
+      "region": "Asia Oriental",
+      "country": "JP",
+      "language": "ja",
+      "reliability": "A",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "NHK News",
+      "url": "https://www3.nhk.or.jp/rss/news/cat0.xml",
+      "categories": [
+        "broadcaster",
+        "politics",
+        "world"
+      ],
+      "region": "Asia Oriental",
+      "country": "JP",
+      "language": "ja",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "The Hankyoreh",
+      "url": "https://www.hani.co.kr/rss/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Asia Oriental",
+      "country": "KR",
+      "language": "ko",
+      "reliability": "A",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "Kyunghyang Shinmun",
+      "url": "https://www.khan.co.kr/rss/rssdata/total_news.xml",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Asia Oriental",
+      "country": "KR",
+      "language": "ko",
+      "reliability": "B",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "Chosun Ilbo",
+      "url": "https://www.chosun.com/rss/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Asia Oriental",
+      "country": "KR",
+      "language": "ko",
+      "reliability": "B",
+      "bias": "right",
+      "notes": ""
+    },
+    {
+      "name": "JoongAng Ilbo",
+      "url": "https://joongang.joins.com/rss/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "business"
+      ],
+      "region": "Asia Oriental",
+      "country": "KR",
+      "language": "ko",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Yonhap News Agency",
+      "url": "https://www.yonhapnewstv.co.kr/rss/",
+      "categories": [
+        "wire",
+        "politics",
+        "world"
+      ],
+      "region": "Asia Oriental",
+      "country": "KR",
+      "language": "ko",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Korea Herald",
+      "url": "https://www.koreaherald.com/rss/",
+      "categories": [
+        "english",
+        "politics",
+        "business"
+      ],
+      "region": "Asia Oriental",
+      "country": "KR",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "The Hindu",
+      "url": "https://www.thehindu.com/news/national/?service=rss",
+      "categories": [
+        "newspaper",
+        "politics",
+        "national"
+      ],
+      "region": "Asia del Sur",
+      "country": "IN",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "The Indian Express",
+      "url": "https://indianexpress.com/feed/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Asia del Sur",
+      "country": "IN",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "The Times of India",
+      "url": "https://timesofindia.indiatimes.com/rssfeedstopstories.cms",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Asia del Sur",
+      "country": "IN",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "India Today",
+      "url": "https://www.indiatoday.in/rss/1206578",
+      "categories": [
+        "magazine",
+        "politics"
+      ],
+      "region": "Asia del Sur",
+      "country": "IN",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Scroll.in",
+      "url": "https://scroll.in/feed/",
+      "categories": [
+        "digital_native",
+        "politics",
+        "opinion"
+      ],
+      "region": "Asia del Sur",
+      "country": "IN",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "The Print",
+      "url": "https://theprint.in/feed/",
+      "categories": [
+        "digital_native",
+        "politics",
+        "opinion"
+      ],
+      "region": "Asia del Sur",
+      "country": "IN",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "ANI (Asian News International)",
+      "url": "https://www.aninews.in/rss/",
+      "categories": [
+        "wire",
+        "politics",
+        "world"
+      ],
+      "region": "Asia del Sur",
+      "country": "IN",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": "India's largest news wire, close to government"
+    },
+    {
+      "name": "Dawn",
+      "url": "https://www.dawn.com/rss/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Asia del Sur",
+      "country": "PK",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "The News International",
+      "url": "https://www.thenews.com.pk/rss/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Asia del Sur",
+      "country": "PK",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Express Tribune",
+      "url": "https://tribune.com.pk/feed/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Asia del Sur",
+      "country": "PK",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Pakistan Today",
+      "url": "https://www.pakistantoday.com.pk/feed/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "business"
+      ],
+      "region": "Asia del Sur",
+      "country": "PK",
+      "language": "en",
+      "reliability": "B",
+      "bias": "right",
+      "notes": ""
+    },
+    {
+      "name": "Geo News",
+      "url": "https://www.geo.tv/rss/",
+      "categories": [
+        "digital_native",
+        "broadcaster",
+        "politics"
+      ],
+      "region": "Asia del Sur",
+      "country": "PK",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "ARY News",
+      "url": "https://www.arynews.tv/feed/",
+      "categories": [
+        "digital_native",
+        "politics"
+      ],
+      "region": "Asia del Sur",
+      "country": "PK",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "IRNA (Islamic Republic News Agency)",
+      "url": "https://en.irna.ir/rss",
+      "categories": [
+        "state_agency",
+        "politics",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "IR",
+      "language": "en",
+      "reliability": "C",
+      "bias": "state_controlled",
+      "notes": "Official Iranian state news agency"
+    },
+    {
+      "name": "Press TV",
+      "url": "https://www.presstv.ir/rss",
+      "categories": [
+        "state_broadcaster",
+        "politics",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "IR",
+      "language": "en",
+      "reliability": "C",
+      "bias": "state_controlled",
+      "notes": "Iranian state-run international broadcaster"
+    },
+    {
+      "name": "Radio Farda",
+      "url": "https://www.radiofarda.com/rss",
+      "categories": [
+        "digital_native",
+        "politics",
+        "iran"
+      ],
+      "region": "Oriente Medio",
+      "country": "IR",
+      "language": "fa",
+      "reliability": "B",
+      "bias": "center",
+      "notes": "US-funded Persian-language news"
+    },
+    {
+      "name": "Tasnim News Agency",
+      "url": "https://www.tasnimnews.com/en/rss",
+      "categories": [
+        "digital_native",
+        "politics",
+        "military"
+      ],
+      "region": "Oriente Medio",
+      "country": "IR",
+      "language": "en",
+      "reliability": "C",
+      "bias": "state_controlled",
+      "notes": "Semi-official, close to IRGC"
+    },
+    {
+      "name": "Cumhuriyet",
+      "url": "https://www.cumhuriyet.com.tr/rss/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "TR",
+      "language": "tr",
+      "reliability": "B",
+      "bias": "left",
+      "notes": "Kemalist/secularist, often critical of government"
+    },
+    {
+      "name": "Sözcü",
+      "url": "https://www.sozcu.com.tr/rss/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Oriente Medio",
+      "country": "TR",
+      "language": "tr",
+      "reliability": "B",
+      "bias": "center_left",
+      "notes": "Secularist, opposition-leaning"
+    },
+    {
+      "name": "Hürriyet",
+      "url": "https://www.hurriyet.com.tr/rss/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "TR",
+      "language": "tr",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": "Mainstream, often pro-government since 2018 takeover"
+    },
+    {
+      "name": "Sabah",
+      "url": "https://www.sabah.com.tr/rss/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Oriente Medio",
+      "country": "TR",
+      "language": "tr",
+      "reliability": "C",
+      "bias": "right",
+      "notes": "Pro-Erdoğan, pro-AKP"
+    },
+    {
+      "name": "Duvar (Gazete Duvar)",
+      "url": "https://www.gazeteduvar.com.tr/rss/",
+      "categories": [
+        "digital_native",
+        "politics"
+      ],
+      "region": "Oriente Medio",
+      "country": "TR",
+      "language": "tr",
+      "reliability": "B",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "TRT World",
+      "url": "https://www.trtworld.com/rss",
+      "categories": [
+        "state_broadcaster",
+        "english",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "TR",
+      "language": "en",
+      "reliability": "C",
+      "bias": "state_controlled",
+      "notes": "Turkish state broadcaster in English"
+    },
+    {
+      "name": "Al Arabiya English",
+      "url": "https://english.alarabiya.net/rss",
+      "categories": [
+        "state_broadcaster",
+        "politics",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "SA",
+      "language": "en",
+      "reliability": "C",
+      "bias": "state_controlled",
+      "notes": "Saudi government-aligned, owned by MBC Group (close to royal court)"
+    },
+    {
+      "name": "Saudi Press Agency (SPA)",
+      "url": "https://www.spa.gov.sa/rss/",
+      "categories": [
+        "state_agency",
+        "politics"
+      ],
+      "region": "Oriente Medio",
+      "country": "SA",
+      "language": "en",
+      "reliability": "C",
+      "bias": "state_controlled",
+      "notes": "Official Saudi government news agency"
+    },
+    {
+      "name": "Arab News",
+      "url": "https://www.arabnews.com/rss",
+      "categories": [
+        "english",
+        "politics",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "SA",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": "English-language Saudi newspaper, moderately independent"
+    },
+    {
+      "name": "Haaretz",
+      "url": "https://www.haaretz.com/rss",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "IL",
+      "language": "en",
+      "reliability": "A",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "Times of Israel",
+      "url": "https://www.timesofisrael.com/feed/",
+      "categories": [
+        "digital_native",
+        "politics",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "IL",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "The Jerusalem Post",
+      "url": "https://www.jpost.com/rss",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "IL",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Israel Hayom",
+      "url": "https://www.israelhayom.com/feed/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Oriente Medio",
+      "country": "IL",
+      "language": "en",
+      "reliability": "B",
+      "bias": "right",
+      "notes": "Free daily, pro-Netanyahu"
+    },
+    {
+      "name": "Ynetnews",
+      "url": "https://www.ynetnews.com/rss",
+      "categories": [
+        "digital_native",
+        "politics",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "IL",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Mada Masr",
+      "url": "https://www.madamasr.com/feed/",
+      "categories": [
+        "digital_native",
+        "politics",
+        "investigations"
+      ],
+      "region": "Oriente Medio",
+      "country": "EG",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": "Independent investigative journalism, critical of government"
+    },
+    {
+      "name": "Ahram Online (Al-Ahram)",
+      "url": "https://english.ahram.org.eg/rss",
+      "categories": [
+        "state_media",
+        "politics",
+        "world"
+      ],
+      "region": "Oriente Medio",
+      "country": "EG",
+      "language": "en",
+      "reliability": "C",
+      "bias": "state_controlled",
+      "notes": "State-owned, Egypt's oldest newspaper"
+    },
+    {
+      "name": "Daily News Egypt",
+      "url": "https://www.dailynewsegypt.com/feed/",
+      "categories": [
+        "digital_native",
+        "english",
+        "politics"
+      ],
+      "region": "Oriente Medio",
+      "country": "EG",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Egyptian Streets",
+      "url": "https://egyptianstreets.com/feed/",
+      "categories": [
+        "digital_native",
+        "english",
+        "lifestyle"
+      ],
+      "region": "Oriente Medio",
+      "country": "EG",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Mail & Guardian",
+      "url": "https://mg.co.za/feed/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "investigations"
+      ],
+      "region": "África Subsahariana",
+      "country": "ZA",
+      "language": "en",
+      "reliability": "A",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "Daily Maverick",
+      "url": "https://www.dailymaverick.co.za/feed/",
+      "categories": [
+        "digital_native",
+        "politics",
+        "investigations"
+      ],
+      "region": "África Subsahariana",
+      "country": "ZA",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "News24",
+      "url": "http://feeds.news24.com/articles/News24/TopStories/rss",
+      "categories": [
+        "digital_native",
+        "politics",
+        "world"
+      ],
+      "region": "África Subsahariana",
+      "country": "ZA",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "The Citizen",
+      "url": "https://www.citizen.co.za/feed/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "África Subsahariana",
+      "country": "ZA",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "GroundUp",
+      "url": "https://www.groundup.org.za/feed/",
+      "categories": [
+        "digital_native",
+        "investigations",
+        "social_justice"
+      ],
+      "region": "África Subsahariana",
+      "country": "ZA",
+      "language": "en",
+      "reliability": "A",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "Vanguard News",
+      "url": "https://www.vanguardngr.com/feed/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "breaking"
+      ],
+      "region": "África Subsahariana",
+      "country": "NG",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "The Guardian Nigeria",
+      "url": "https://guardian.ng/feed/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "África Subsahariana",
+      "country": "NG",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "The Nation",
+      "url": "https://thenationonlineng.net/feed/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "África Subsahariana",
+      "country": "NG",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Leadership News",
+      "url": "https://leadership.ng/feed/",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "África Subsahariana",
+      "country": "NG",
+      "language": "en",
+      "reliability": "B",
+      "bias": "center_right",
+      "notes": ""
+    },
+    {
+      "name": "Premium Times",
+      "url": "https://www.premiumtimesng.com/feed",
+      "categories": [
+        "digital_native",
+        "politics",
+        "investigations"
+      ],
+      "region": "África Subsahariana",
+      "country": "NG",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Sahara Reporters",
+      "url": "https://saharareporters.com/feed",
+      "categories": [
+        "digital_native",
+        "investigations",
+        "politics"
+      ],
+      "region": "África Subsahariana",
+      "country": "NG",
+      "language": "en",
+      "reliability": "B",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "ABC News (Australian Broadcasting Corporation)",
+      "url": "https://www.abc.net.au/news/feed/46082/rss.xml",
+      "categories": [
+        "broadcaster",
+        "politics",
+        "world"
+      ],
+      "region": "Oceanía",
+      "country": "AU",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "The Sydney Morning Herald",
+      "url": "https://www.smh.com.au/rss/feed.xml",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Oceanía",
+      "country": "AU",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center_left",
+      "notes": ""
+    },
+    {
+      "name": "The Australian",
+      "url": "https://www.theaustralian.com.au/feed/",
+      "categories": [
+        "newspaper",
+        "politics",
+        "world"
+      ],
+      "region": "Oceanía",
+      "country": "AU",
+      "language": "en",
+      "reliability": "B",
+      "bias": "right",
+      "notes": "Rupert Murdoch-owned"
+    },
+    {
+      "name": "The Daily Telegraph (AU)",
+      "url": "http://www.dailytelegraph.com.au/news/breaking-news/rss",
+      "categories": [
+        "newspaper",
+        "politics"
+      ],
+      "region": "Oceanía",
+      "country": "AU",
+      "language": "en",
+      "reliability": "B",
+      "bias": "right",
+      "notes": ""
+    },
+    {
+      "name": "The Conversation (AU)",
+      "url": "https://theconversation.com/au/feed",
+      "categories": [
+        "digital_native",
+        "analysis",
+        "academic"
+      ],
+      "region": "Oceanía",
+      "country": "AU",
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Crikey",
+      "url": "https://www.crikey.com.au/feed/",
+      "categories": [
+        "digital_native",
+        "politics",
+        "opinion"
+      ],
+      "region": "Oceanía",
+      "country": "AU",
+      "language": "en",
+      "reliability": "B",
+      "bias": "left",
+      "notes": ""
+    },
+    {
+      "name": "Reuters",
+      "url": "https://www.reutersagency.com/feed/",
+      "categories": [
+        "wire",
+        "geopolitics",
+        "business",
+        "breaking"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": "Reuters removed direct RSS in 2020; Google News workaround listed"
+    },
+    {
+      "name": "Associated Press (AP)",
+      "url": "https://rsshub.app/apnews",
+      "categories": [
+        "wire",
+        "breaking",
+        "geopolitics"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "BBC News",
+      "url": "https://feeds.bbci.co.uk/news/rss.xml",
+      "categories": [
+        "broadcaster",
+        "world",
+        "geopolitics"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "DW News (Deutsche Welle)",
+      "url": "https://rss.dw.com/rdf/rss-en-top",
+      "categories": [
+        "broadcaster",
+        "world",
+        "geopolitics"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "France 24 English",
+      "url": "https://www.france24.com/en/rss",
+      "categories": [
+        "broadcaster",
+        "world",
+        "geopolitics"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "The Economist",
+      "url": "https://www.economist.com/the-world-this-week/rss.xml",
+      "categories": [
+        "geopolitics",
+        "analysis",
+        "intelligence"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Foreign Affairs",
+      "url": "https://www.foreignaffairs.com/feed",
+      "categories": [
+        "geopolitics",
+        "intelligence",
+        "analysis",
+        "foreign_policy"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": "Premium publication on international relations and geopolitics"
+    },
+    {
+      "name": "Stratfor / RANE Worldview",
+      "url": "https://worldview.stratfor.com/rss",
+      "categories": [
+        "geopolitics",
+        "intelligence",
+        "analysis",
+        "forecasting"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "B",
+      "bias": "center",
+      "notes": "Geopolitical intelligence platform, now part of RANE"
+    },
+    {
+      "name": "Janes Defence",
+      "url": "https://www.janes.com/defence-intelligence-insights/defence-news/rss",
+      "categories": [
+        "defense",
+        "intelligence",
+        "military",
+        "security"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": "Premier open-source defense intelligence"
+    },
+    {
+      "name": "Defense News",
+      "url": "https://www.defensenews.com/m/rss/",
+      "categories": [
+        "defense",
+        "military",
+        "security",
+        "geopolitics"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Defense One",
+      "url": "https://www.defenseone.com/rss/all/",
+      "categories": [
+        "defense",
+        "security",
+        "technology"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
+    },
+    {
+      "name": "Radio Free Europe / Radio Liberty",
+      "url": "https://www.rferl.org/rssfeeds",
+      "categories": [
+        "geopolitics",
+        "intelligence",
+        "eastern_europe",
+        "central_asia"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": "US-funded broadcaster covering authoritarian states"
+    },
+    {
+      "name": "Jane's Defence Weekly (via Janes)",
+      "url": "https://www.janes.com/rss",
+      "categories": [
+        "defense",
+        "intelligence",
+        "military"
+      ],
+      "region": "Global",
+      "country": null,
+      "language": "en",
+      "reliability": "A",
+      "bias": "center",
+      "notes": ""
     }
   ],
   "youtube_channels": [
@@ -247,7 +2369,11 @@
       "channel_id": "UCJQQVLyM6wtPleV4wFBK06g",
       "country": "ES",
       "political_bias": "right",
-      "categories": ["geopolitics", "economy", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "economy",
+        "diplomacy"
+      ],
       "language": "es",
       "reliability": "B",
       "subscribers_approx": "2.5M"
@@ -257,7 +2383,10 @@
       "channel_id": "UC0oux2kiDINhX76StpGpA8g",
       "country": "ES",
       "political_bias": "left",
-      "categories": ["geopolitics", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy"
+      ],
       "language": "es",
       "reliability": "B",
       "subscribers_approx": "800K"
@@ -267,7 +2396,11 @@
       "channel_id": "UCqOjwNp1LSBkXGOMfFjggQ",
       "country": "MX",
       "political_bias": "left",
-      "categories": ["geopolitics", "diplomacy", "security"],
+      "categories": [
+        "geopolitics",
+        "diplomacy",
+        "security"
+      ],
       "language": "es",
       "reliability": "A",
       "subscribers_approx": "3M"
@@ -277,7 +2410,10 @@
       "channel_id": "UCHpN0b-g3_2fS8aYgJFkYQ",
       "country": "MX",
       "political_bias": "right",
-      "categories": ["economy", "geopolitics"],
+      "categories": [
+        "economy",
+        "geopolitics"
+      ],
       "language": "es",
       "reliability": "B",
       "subscribers_approx": "1.5M"
@@ -287,7 +2423,10 @@
       "channel_id": "UCFgK7d38K3vR7jGkPZxN4Yw",
       "country": "AR",
       "political_bias": "left",
-      "categories": ["geopolitics", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy"
+      ],
       "language": "es",
       "reliability": "B",
       "subscribers_approx": "2M"
@@ -297,7 +2436,10 @@
       "channel_id": "UCjx3k-8-5cJqJqJqJqJqJq",
       "country": "AR",
       "political_bias": "right",
-      "categories": ["geopolitics", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy"
+      ],
       "language": "es",
       "reliability": "B",
       "subscribers_approx": "3M"
@@ -307,7 +2449,11 @@
       "channel_id": "UCopVhz5SlujUpiDiYzWtbpw",
       "country": "CO",
       "political_bias": "left",
-      "categories": ["geopolitics", "diplomacy", "security"],
+      "categories": [
+        "geopolitics",
+        "diplomacy",
+        "security"
+      ],
       "language": "es",
       "reliability": "B",
       "subscribers_approx": "1.5M"
@@ -317,7 +2463,10 @@
       "channel_id": "UCcZ4I0vLqkZqZqZqZqZqZq",
       "country": "CO",
       "political_bias": "right",
-      "categories": ["geopolitics", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy"
+      ],
       "language": "es",
       "reliability": "B",
       "subscribers_approx": "2M"
@@ -327,7 +2476,10 @@
       "channel_id": "UCb1NjNjNjNjNjNjNjNjNj",
       "country": "BR",
       "political_bias": "left",
-      "categories": ["geopolitics", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy"
+      ],
       "language": "pt",
       "reliability": "B",
       "subscribers_approx": "1M"
@@ -337,7 +2489,10 @@
       "channel_id": "UCjPpNjPpNjPpNjPpNjPpN",
       "country": "BR",
       "political_bias": "right",
-      "categories": ["geopolitics", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy"
+      ],
       "language": "pt",
       "reliability": "B",
       "subscribers_approx": "3M"
@@ -347,7 +2502,11 @@
       "channel_id": "UCzuqE7-t13O4NIDYJfakrhw",
       "country": "US",
       "political_bias": "left",
-      "categories": ["geopolitics", "diplomacy", "security"],
+      "categories": [
+        "geopolitics",
+        "diplomacy",
+        "security"
+      ],
       "language": "en",
       "reliability": "A",
       "subscribers_approx": "3.5M"
@@ -357,7 +2516,11 @@
       "channel_id": "UCHqkXbgqrDrDVInBMSoGQgQ",
       "country": "US",
       "political_bias": "right",
-      "categories": ["geopolitics", "diplomacy", "security"],
+      "categories": [
+        "geopolitics",
+        "diplomacy",
+        "security"
+      ],
       "language": "en",
       "reliability": "B",
       "subscribers_approx": "2M"
@@ -367,7 +2530,10 @@
       "channel_id": "UCU4kXjw5e0XZqGqXqJzqKw",
       "country": "GB",
       "political_bias": "left",
-      "categories": ["geopolitics", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy"
+      ],
       "language": "en",
       "reliability": "B",
       "subscribers_approx": "500K"
@@ -377,7 +2543,10 @@
       "channel_id": "UCjPpNjPpNjPpNjPpNjPpN",
       "country": "GB",
       "political_bias": "right",
-      "categories": ["geopolitics", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy"
+      ],
       "language": "en",
       "reliability": "C",
       "subscribers_approx": "800K"
@@ -387,7 +2556,10 @@
       "channel_id": "UCCCPCZNChQdGa9EkATeye4g",
       "country": "FR",
       "political_bias": "left",
-      "categories": ["geopolitics", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy"
+      ],
       "language": "fr",
       "reliability": "A",
       "subscribers_approx": "2M"
@@ -397,7 +2569,10 @@
       "channel_id": "UCtSam9jXbMn2H7x6k5j5j5",
       "country": "FR",
       "political_bias": "right",
-      "categories": ["geopolitics", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy"
+      ],
       "language": "fr",
       "reliability": "C",
       "subscribers_approx": "1.5M"
@@ -407,7 +2582,11 @@
       "channel_id": "UCknLrEdh1pT2nz-6aXp_8bg",
       "country": "DE",
       "political_bias": "left",
-      "categories": ["geopolitics", "diplomacy", "economy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy",
+        "economy"
+      ],
       "language": "en",
       "reliability": "A",
       "subscribers_approx": "3M"
@@ -417,7 +2596,10 @@
       "channel_id": "UCjPpNjPpNjPpNjPpNjPpN",
       "country": "DE",
       "political_bias": "right",
-      "categories": ["geopolitics", "diplomacy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy"
+      ],
       "language": "de",
       "reliability": "C",
       "subscribers_approx": "200K"
@@ -427,7 +2609,11 @@
       "channel_id": "UCgrNz-aDmcr27uto8erIB7w",
       "country": "CN",
       "political_bias": "left",
-      "categories": ["geopolitics", "diplomacy", "economy"],
+      "categories": [
+        "geopolitics",
+        "diplomacy",
+        "economy"
+      ],
       "language": "en",
       "reliability": "C",
       "subscribers_approx": "4M"
@@ -437,7 +2623,11 @@
       "channel_id": "UC_gUMiXK8bQhx6ASt-z-7LQ",
       "country": "IN",
       "political_bias": "right",
-      "categories": ["geopolitics", "diplomacy", "security"],
+      "categories": [
+        "geopolitics",
+        "diplomacy",
+        "security"
+      ],
       "language": "en",
       "reliability": "B",
       "subscribers_approx": "5M"
@@ -447,7 +2637,11 @@
       "channel_id": "UCNye-wNBqNL5ZzHSJj3l8Bg",
       "country": "QA",
       "political_bias": "left",
-      "categories": ["geopolitics", "diplomacy", "security"],
+      "categories": [
+        "geopolitics",
+        "diplomacy",
+        "security"
+      ],
       "language": "en",
       "reliability": "B",
       "subscribers_approx": "10M"
@@ -457,7 +2651,11 @@
       "channel_id": "UCnMTB1gBv8p5wfiTXMI1saw",
       "country": "US",
       "political_bias": "center",
-      "categories": ["defense", "security", "geopolitics"],
+      "categories": [
+        "defense",
+        "security",
+        "geopolitics"
+      ],
       "language": "en",
       "reliability": "A",
       "subscribers_approx": "200K"
@@ -467,7 +2665,10 @@
       "channel_id": "UCe-5bH-oD4QoXLN3_1e7hzw",
       "country": "US",
       "political_bias": "center",
-      "categories": ["diplomacy", "geopolitics"],
+      "categories": [
+        "diplomacy",
+        "geopolitics"
+      ],
       "language": "en",
       "reliability": "A",
       "subscribers_approx": "300K"
@@ -477,7 +2678,11 @@
       "channel_id": "UCqWEcBfAuXaVQDMZXh_CNYQ",
       "country": "GB",
       "political_bias": "center",
-      "categories": ["geopolitics", "diplomacy", "defense"],
+      "categories": [
+        "geopolitics",
+        "diplomacy",
+        "defense"
+      ],
       "language": "en",
       "reliability": "A",
       "subscribers_approx": "100K"
@@ -487,7 +2692,10 @@
       "channel_id": "UCF3gZFO9kcOIAYwcZaRFMtQ",
       "country": "GB",
       "political_bias": "center",
-      "categories": ["general", "diplomacy"],
+      "categories": [
+        "general",
+        "diplomacy"
+      ],
       "language": "es",
       "reliability": "A",
       "subscribers_approx": "5M"
@@ -497,7 +2705,11 @@
       "channel_id": "UCxK9dNLiVWX5N6IlbgCMEoA",
       "country": "DE",
       "political_bias": "center",
-      "categories": ["general", "economy", "diplomacy"],
+      "categories": [
+        "general",
+        "economy",
+        "diplomacy"
+      ],
       "language": "es",
       "reliability": "A",
       "subscribers_approx": "2M"
@@ -507,7 +2719,10 @@
       "channel_id": "UCN7YXKfBhfnHCNq8mYvgbFg",
       "country": "FR",
       "political_bias": "center",
-      "categories": ["general", "diplomacy"],
+      "categories": [
+        "general",
+        "diplomacy"
+      ],
       "language": "es",
       "reliability": "A",
       "subscribers_approx": "1M"
@@ -517,7 +2732,11 @@
       "channel_id": "UCB31NVh95xHTSs6W1J3YbSg",
       "country": "US",
       "political_bias": "center",
-      "categories": ["geopolitics", "intelligence", "defense"],
+      "categories": [
+        "geopolitics",
+        "intelligence",
+        "defense"
+      ],
       "language": "en",
       "reliability": "A",
       "subscribers_approx": "150K"
@@ -527,7 +2746,10 @@
       "channel_id": "UCBHM_zOQ5MHHmMBBkMR3iHg",
       "country": "US",
       "political_bias": "center",
-      "categories": ["economy", "finance"],
+      "categories": [
+        "economy",
+        "finance"
+      ],
       "language": "en",
       "reliability": "B",
       "subscribers_approx": "1M"
@@ -537,7 +2759,11 @@
       "channel_id": "UC8K4p5X29-F7K_U2QlPpiqA",
       "country": "US",
       "political_bias": "center",
-      "categories": ["defense", "security", "intelligence"],
+      "categories": [
+        "defense",
+        "security",
+        "intelligence"
+      ],
       "language": "en",
       "reliability": "A",
       "subscribers_approx": "50K"

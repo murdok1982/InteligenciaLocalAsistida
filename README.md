@@ -860,6 +860,60 @@ Los artículos OSINT se cachean 2 horas en `article_cache`. Si hay suficientes a
 
 ---
 
+## 📡 FUENTES DE INFORMACIÓN (OSINT)
+
+El sistema recolecta inteligencia de **166 fuentes RSS** y **30 canales de YouTube** en **11 idiomas**,
+cubriendo **23 países** con equilibrio entre espectro político izquierda/derecha.
+
+### Estructura de fuentes por país
+
+Cada país tiene fuentes etiquetadas por sesgo político para garantizar pluralidad:
+
+| Sesgo | Fuentes | Ejemplos |
+|-------|---------|----------|
+| `left` / `center_left` | 38 | NYT, Guardian, Le Monde, Folha, CBC |
+| `center` | 52 | AP, Reuters, BBC, AFP, France 24 |
+| `right` / `center_right` | 35 | WSJ, Telegraph, Le Figaro, FAZ |
+| `state_controlled` | 11 | TASS, Xinhua, RT, Press TV, CGTN |
+
+### Cobertura por país
+
+| País | RSS | Izquierda | Derecha | Digitales |
+|------|-----|-----------|---------|-----------|
+| US | 8 | NYT, WashPost | Fox, WSJ | Politico, Axios |
+| MX | 6 | La Jornada | Reforma, El Finan. | Animal Político |
+| BR | 6 | Folha | Estadão, Gazeta | G1, UOL |
+| AR | 5 | Página/12 | La Nación, Ámbito | Infobae |
+| GB | 5 | Guardian, Indep. | Telegraph, Times | Sky, UnHerd |
+| FR | 6 | Le Monde, Libé | Le Figaro, Les Echos | Mediapart |
+| DE | 6 | Spiegel, SZ | FAZ, Die Welt | Zeit, taz |
+| RU | 5 | Novaya Gazeta, MT | — | Meduza (+ TASS, RT) |
+| UA | 4 | Ukr.Pravda, Kyiv Ind. | — | Euromaidan Press |
+| CN | 4 | — | — | SCMP, Caixin (+ Xinhua, GT) |
+| JP | 5 | Asahi, Mainichi | Yomiuri, Nikkei | NHK |
+| KR | 6 | Hankyoreh, Kyunghyang | Chosun, JoongAng | Yonhap, Herald |
+| IN | 7 | The Hindu, Indian Exp. | TOI, India Today | Scroll, The Print |
+| PK | 6 | Dawn, The News | Express Trib., PakToday | Geo, ARY |
+| IR | 4 | — | — | Radio Farda (+ IRNA, PressTV) |
+| TR | 6 | Cumhuriyet, Sözcü | Hürriyet, Sabah | Duvar, TRT World |
+| SA | 3 | — | — | Arab News (+ Al Arabiya, SPA) |
+| IL | 5 | Haaretz, ToI | Jerusalem Post, IsraelHayom | Ynet |
+| EG | 4 | Mada Masr | — | Daily News Egypt (+ Ahram) |
+| ZA | 5 | Mail&Guardian, Maverick | News24, Citizen | GroundUp |
+| NG | 6 | Vanguard, Guardian NG | The Nation, Leadership | Premium Times |
+| AU | 6 | ABC, Sydney Morning H. | The Australian, Telegraph | TheConversation, Crikey |
+
+### Cómo añadir un canal de YouTube
+
+Para añadir canales de YouTube a `sources/sources.json`:
+
+1. Ve al canal de YouTube
+2. La URL tendrá el formato: `https://www.youtube.com/channel/UC...`
+3. Copia el `channel_id` (la parte después de `/channel/`)
+4. Añade la entrada en `youtube_channels` con nombre, ID, país, sesgo y fiabilidad
+
+---
+
 ## SOLUCIÓN DE PROBLEMAS COMUNES
 
 ```
