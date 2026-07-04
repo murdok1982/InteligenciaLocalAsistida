@@ -2,7 +2,6 @@
 InteligenciaGeopolitica — weekly geopolitical intelligence report generator.
 Runs fully locally with Ollama (gemma4:4b); falls back to OpenAI if configured.
 """
-import json
 import logging
 import math
 import os
@@ -21,15 +20,15 @@ if _env_path.exists():
     os.environ.update(dotenv_values(_env_path))
 load_dotenv(dotenv_path=_env_path, override=True)
 
-from utils.io import ensure_dir, load_config, save_text, ts_stamp
-from utils.llm import LLM_PROVIDER, OLLAMA_MODEL, ask_model
-from utils.regions import region_for
-from utils.factcheck import grade_reliability
-from utils.database import init_db, cache_articles, get_cached_articles, save_report
 from providers.gdelt_provider import search_gdelt
 from providers.newsapi_provider import search_newsapi
 from providers.rss_provider import search_rss
 from providers.youtube_provider import search_youtube
+from utils.database import cache_articles, get_cached_articles, init_db, save_report
+from utils.factcheck import grade_reliability
+from utils.io import ensure_dir, load_config, save_text, ts_stamp
+from utils.llm import LLM_PROVIDER, OLLAMA_MODEL, ask_model
+from utils.regions import region_for
 
 logger = logging.getLogger("inteligencia_geopolitica")
 
@@ -166,6 +165,56 @@ def _analyze_country(
     except Exception as exc:
         logger.error("Fallo recolectando artículos para %s: %s", name, exc)
         articles = []
+
+    try:
+        from utils.factcheck import rank_articles
+        articles = rank_articles(articles, country_name=name, top_n=15)
+        logger.info("%s: rankeados a %d artículos por relevancia", name, len(articles))
+    except Exception as exc:
+        logger.debug("Ranker no disponible: %s", exc)
+
+    try:
+        from utils.database import get_cached_articles
+        all_articles_for_country = get_cached_articles(country=name, max_age_hours=48)
+        from collections import Counter
+        cat_counter = Counter()
+        for a in all_articles_for_country:
+            cat = a.get("category", "") or ""
+            if cat:
+                cat_counter[cat] += 1
+        total_with_cat = sum(cat_counter.values()) or 1
+
+        top_cats = cat_counter.most_common(3)
+        if top_cats:
+            focus_instruction = []
+            reduce_instruction = []
+            used = set()
+            for cat, count in top_cats:
+                pct = count / total_with_cat * 100
+                if pct > 25:
+                    focus_instruction.append(f"ENFOCATE en {cat} ({pct:.0f}% de las noticias)")
+                    used.add(cat)
+                elif pct > 10:
+                    focus_instruction.append(f"Prioriza {cat} ({pct:.0f}% de las noticias)")
+                    used.add(cat)
+
+            all_cats = ["economía", "seguridad", "defensa", "inteligencia"]
+            for cat in all_cats:
+                if cat not in used:
+                    reduce_instruction.append(f"reduce {cat} al mínimo crítico")
+
+            dynamic_instruction = ". ".join(focus_instruction)
+            if reduce_instruction:
+                dynamic_instruction += ". " + ", ".join(reduce_instruction)
+
+            analysis_tpl = analysis_tpl.replace(
+                "{{dynamic_focus}}",
+                f"\nInstrucción de enfoque dinámico: {dynamic_instruction}\n"
+            )
+            logger.info("%s: prompt dinamizado: %s", name, dynamic_instruction)
+    except Exception as exc:
+        logger.debug("Dynamic prompt no disponible: %s", exc)
+        analysis_tpl = analysis_tpl.replace("{{dynamic_focus}}", "")
 
     bullets = format_bullets(articles)
     logger.info("%s: %d artículos recolectados", name, len(articles))

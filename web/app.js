@@ -22,6 +22,8 @@ const apiKeyField = document.getElementById('apiKeyField');
 const applyConfigBtn = document.getElementById('applyConfigBtn');
 
 let apiToken = '';
+const urlParams = new URLSearchParams(window.location.search);
+let sessionToken = urlParams.get('token') || '';
 let lastResponse = '';
 let isStreaming = false;
 let availableModels = [];
@@ -29,7 +31,7 @@ let availableModels = [];
 function authHeaders() {
   return {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${apiToken}`
+    'Authorization': `Bearer ${apiToken || sessionToken}`
   };
 }
 
@@ -38,6 +40,7 @@ async function fetchToken() {
     const res = await fetch('/api/token');
     const data = await res.json();
     apiToken = data.token || '';
+    if (!sessionToken) sessionToken = data.session || '';
   } catch (e) {
     apiToken = '';
   }
@@ -292,76 +295,80 @@ async function launchPipeline() {
   pipelineProgress.style.display = 'block';
   progressBar.style.width = '0%';
   progressText.textContent = 'Preparando...';
-
-  const days = document.getElementById('daysSelect').value;
-  const classification = document.getElementById('classSelect').value;
+  stopPipelinePolling();
 
   try {
-    const res = await fetch(`/api/pipeline/stream?days=${days}&classification=${classification}`, {
-      headers: authHeaders()
+    const res = await fetch('/api/pipeline', {
+      method: 'POST',
+      headers: authHeaders(),
     });
 
     if (!res.ok) {
-      pipelineStatus.textContent = `Error: ${res.statusText}`;
+      const errData = await res.json().catch(() => ({}));
+      pipelineStatus.textContent = `Error: ${errData.error || res.statusText}`;
       pipelineProgress.style.display = 'none';
       pipelineBtn.disabled = false;
       return;
     }
 
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = '';
-    let reportFile = '';
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split('\n');
-      buffer = lines.pop() || '';
-
-      for (const line of lines) {
-        if (line.startsWith('data: ')) {
-          const payload = line.slice(6);
-          if (payload === '[DONE]') continue;
-          try {
-            const parsed = JSON.parse(payload);
-            if (parsed.country) {
-              progressText.textContent = `Procesando: ${parsed.country}`;
-            }
-            if (parsed.progress !== undefined) {
-              const pct = Math.round(parsed.progress);
-              progressBar.style.width = `${pct}%`;
-              progressBar.setAttribute('aria-valuenow', pct);
-            }
-            if (parsed.completed !== undefined && parsed.total !== undefined) {
-              progressText.textContent = `${parsed.completed}/${parsed.total} paises completados` +
-                (parsed.country ? ` · Actual: ${parsed.country}` : '');
-            }
-            if (parsed.status) {
-              pipelineStatus.textContent = parsed.status;
-            }
-            if (parsed.report) {
-              reportFile = parsed.report;
-            }
-            if (parsed.error) {
-              pipelineStatus.textContent = `Error: ${parsed.error}`;
-            }
-          } catch {}
-        }
-      }
-    }
-
-    if (reportFile) {
-      pipelineStatus.innerHTML = `Pipeline completado. <a href="/api/reports/${encodeURIComponent(reportFile)}" class="report-link" download>Descargar reporte</a>`;
+    const data = await res.json();
+    if (data.ok) {
+      pipelineStatus.textContent = 'Pipeline lanzado. Monitoreando progreso...';
+      startPipelinePolling();
     } else {
-      pipelineStatus.textContent = pipelineStatus.textContent || 'Pipeline finalizado.';
+      pipelineStatus.textContent = `Error: ${data.error || 'Unknown'}`;
+      pipelineBtn.disabled = false;
     }
   } catch (error) {
     pipelineStatus.textContent = `Error de conexion: ${error.message}`;
-  } finally {
     pipelineBtn.disabled = false;
+  }
+}
+
+let pipelinePollInterval = null;
+
+function startPipelinePolling() {
+  if (pipelinePollInterval) clearInterval(pipelinePollInterval);
+  pipelinePollInterval = setInterval(async () => {
+    try {
+      const res = await fetch('/api/pipeline/status', { headers: authHeaders() });
+      const data = await res.json();
+      if (data.ok) {
+        if (data.running) {
+          const pct = Math.round(data.progress || 0);
+          progressBar.style.width = `${pct}%`;
+          progressBar.setAttribute('aria-valuenow', pct);
+          const country = data.current_country || '';
+          const phase = data.current_phase || '';
+          const total = data.total_countries || 23;
+          let statusText = '';
+          if (phase === 'recolectando') statusText = 'Recolectando fuentes...';
+          else if (phase === 'analizando' && country) statusText = `Analizando: ${country}`;
+          else statusText = `Progreso: ${pct}%`;
+          progressText.textContent = statusText;
+          pipelineStatus.textContent = `Estado: ${data.status} · ${country ? 'País: ' + country : ''}`;
+        }
+        if (!data.running || data.status === 'completed' || data.status === 'failed') {
+          stopPipelinePolling();
+          if (data.status === 'completed') {
+            pipelineStatus.textContent = 'Pipeline completado. Revisa la sección de Reportes.';
+            loadReports();
+          } else if (data.status === 'failed') {
+            pipelineStatus.textContent = `Error: ${data.error || 'Fallo desconocido'}`;
+          }
+          pipelineBtn.disabled = false;
+        }
+      }
+    } catch (e) {
+      console.error('Polling error:', e);
+    }
+  }, 2000);
+}
+
+function stopPipelinePolling() {
+  if (pipelinePollInterval) {
+    clearInterval(pipelinePollInterval);
+    pipelinePollInterval = null;
   }
 }
 
@@ -470,6 +477,7 @@ document.querySelectorAll('.nav-item').forEach(item => {
     if (item.dataset.section === 'history') renderHistory();
     if (item.dataset.section === 'config') loadConfig();
     if (item.dataset.section === 'reports') loadReports();
+    if (item.dataset.section !== 'pipeline') stopPipelinePolling();
   });
 });
 

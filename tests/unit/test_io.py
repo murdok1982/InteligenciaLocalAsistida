@@ -1,9 +1,10 @@
 """Tests for utils.io module."""
 import tempfile
-import yaml
 from pathlib import Path
 
-from utils.io import load_config, ensure_dir, save_text, ts_stamp
+import yaml
+
+from utils.io import ensure_dir, load_config, save_text, ts_stamp
 
 
 class TestLoadConfig:

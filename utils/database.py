@@ -1,7 +1,7 @@
+import json
+import logging
 import os
 import sqlite3
-import logging
-import json
 import threading
 from datetime import datetime, timedelta
 from typing import Optional
@@ -148,6 +148,18 @@ def init_db() -> None:
                 CREATE INDEX IF NOT EXISTS idx_cache_cached_at ON article_cache(cached_at);
                 CREATE INDEX IF NOT EXISTS idx_reports_generated ON reports(generated_at);
                 CREATE INDEX IF NOT EXISTS idx_schedules_active ON schedules(active);
+
+                CREATE TABLE IF NOT EXISTS article_embeddings (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    article_url TEXT NOT NULL,
+                    embedding BLOB,
+                    text_chunk TEXT,
+                    country TEXT,
+                    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                    FOREIGN KEY (article_url) REFERENCES article_cache(url) ON DELETE CASCADE
+                );
+                CREATE INDEX IF NOT EXISTS idx_emb_article_url ON article_embeddings(article_url);
+                CREATE INDEX IF NOT EXISTS idx_emb_country ON article_embeddings(country);
             """)
             conn.commit()
         logger.info("Base de datos inicializada: %s (schema v%d)", DB_PATH, _SCHEMA_VERSION)
@@ -271,6 +283,14 @@ def cache_articles(articles: list[dict], ttl_hours: int = 2) -> int:
                             ),
                         )
                         count += 1
+                        try:
+                            from utils.embeddings import get_embedding
+                            text_to_embed = f"{article.get('title', '')} {article.get('content', article.get('summary', ''))}"
+                            emb = get_embedding(text_to_embed)
+                            if emb:
+                                store_article_embedding(article.get("url", ""), emb, text_to_embed[:1000], article.get("country", ""))
+                        except Exception:
+                            pass
                     except sqlite3.Error as e:
                         logger.warning("Error cacheando articulo %s: %s", article.get("url"), e)
 
@@ -439,28 +459,84 @@ def get_related_context(
         raise
 
 
+def store_article_embedding(article_url: str, embedding: list[float], text_chunk: str, country: str) -> None:
+    try:
+        embedding_json = json.dumps(embedding)
+        with _db_lock:
+            with _Connection() as conn:
+                conn.execute(
+                    """INSERT OR REPLACE INTO article_embeddings
+                       (article_url, embedding, text_chunk, country)
+                       VALUES (?, ?, ?, ?)""",
+                    (article_url, embedding_json, text_chunk, country),
+                )
+                conn.commit()
+    except sqlite3.Error as e:
+        logger.warning("Error guardando embedding para %s: %s", article_url, e)
+
+
+def get_embeddings_by_country(country: Optional[str] = None) -> list[dict]:
+    try:
+        with _db_lock:
+            with _Connection() as conn:
+                query = "SELECT article_url, embedding, text_chunk, country FROM article_embeddings"
+                params: list = []
+                if country:
+                    query += " WHERE country = ?"
+                    params.append(country)
+                rows = conn.execute(query, params).fetchall()
+                results = []
+                for row in rows:
+                    d = dict(row)
+                    try:
+                        d["embedding"] = json.loads(d["embedding"])
+                    except (json.JSONDecodeError, TypeError):
+                        d["embedding"] = []
+                    results.append(d)
+                return results
+    except sqlite3.Error as e:
+        logger.warning("Error obteniendo embeddings: %s", e)
+        return []
+
+
 def build_context_prompt(
     country: Optional[str] = None,
     region: Optional[str] = None,
+    query: str = "latest geopolitical developments and strategic changes",
 ) -> str:
-    context_items = get_related_context(country=country, region=region, limit=5)
+    try:
+        from utils.embeddings import search_similar
+        articles = search_similar(query, country=country, top_k=10)
+    except Exception:
+        context_items = get_related_context(country=country, region=region, limit=5)
+        if not context_items:
+            return ""
+        return _format_rag_fallback(context_items)
 
-    if not context_items:
+    if not articles:
         return ""
 
-    lines = ["CONTEXTO DE ANALISIS PREVIOS (RAG):"]
+    lines = ["CONTEXTO RELEVANTE (RAG):"]
     lines.append("=" * 50)
+    for i, a in enumerate(articles, 1):
+        similarity = a.get("similarity_score", 0)
+        lines.append(f"\n--- Fuente #{i} (similitud: {similarity:.2f}) ---")
+        lines.append(f"Título: {a.get('title', 'N/A')}")
+        lines.append(f"URL: {a.get('url', 'N/A')}")
+        lines.append(f"Contenido: {a.get('summary', '')[:500]}")
+    lines.append("\n" + "=" * 50)
+    lines.append("Usa este contexto obtenido por similitud semantica como base para tu analisis.")
+    return "\n".join(lines)
 
+
+def _format_rag_fallback(context_items: list) -> str:
+    lines = ["CONTEXTO DE ANALISIS PREVIOS (RAG fallback):"]
+    lines.append("=" * 50)
     for i, item in enumerate(context_items, 1):
         lines.append(f"\n--- Analisis #{i} ({item.get('created_at', 'N/A')}) ---")
-        lines.append(f"Pais: {item.get('country', 'N/A')} | Region: {item.get('region', 'N/A')}")
-        lines.append(f"Consulta: {item.get('prompt', '')[:200]}")
-        lines.append(f"Respuesta (extracto): {item.get('response', '')[:500]}")
-
+        lines.append(f"Pais: {item.get('country', 'N/A')}")
+        lines.append(f"Respuesta: {item.get('response', '')[:500]}")
     lines.append("\n" + "=" * 50)
-    lines.append("Usa este contexto historico para enriquecer tu analisis actual.")
-    lines.append("Referencia analisis previos cuando sea relevante. Evita redundancias.")
-
     return "\n".join(lines)
 
 

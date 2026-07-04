@@ -8,7 +8,7 @@ import json
 import re
 import time
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict, List
 
 import feedparser
 from bs4 import BeautifulSoup

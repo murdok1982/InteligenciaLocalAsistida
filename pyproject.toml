@@ -9,6 +9,7 @@ description = "Weekly geopolitical intelligence report generator with local LLM 
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "numpy>=1.26.0",
     "python-dotenv>=1.0.1",
     "PyYAML>=6.0.2",
     "requests>=2.32.3",

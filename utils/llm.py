@@ -2,10 +2,11 @@
 LLM adapter: Ollama (primary, local) via HTTP API → OpenAI (fallback, optional).
 Set LLM_PROVIDER=ollama or LLM_PROVIDER=openai in .env.
 """
+import json
 import logging
 import os
 import re
-import json
+
 import requests
 from dotenv import load_dotenv
 from tenacity import retry, stop_after_attempt, wait_exponential

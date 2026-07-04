@@ -20,12 +20,20 @@ ENV_PATH = ROOT / ".env"
 if ENV_PATH.exists():
     load_dotenv(dotenv_path=ENV_PATH, override=True)
 
-from utils.llm import LLM_PROVIDER, OLLAMA_MODEL, ask_model, ask_model_stream, set_model, set_provider, get_ollama_tags
 from utils.database import (
-    init_db, save_analysis, get_history, get_analysis, delete_analysis,
-    save_report, get_reports as db_get_reports, save_schedule, get_schedules,
-    delete_schedule, cache_articles, get_stats,
+    delete_analysis,
+    get_analysis,
+    get_history,
+    get_schedules,
+    init_db,
+    save_analysis,
 )
+from utils.database import (
+    get_reports as db_get_reports,
+)
+from utils.llm import LLM_PROVIDER, OLLAMA_MODEL, ask_model, ask_model_stream, get_ollama_tags
+
+SESSION_TOKEN = secrets.token_urlsafe(32)
 
 WEB_ROOT = ROOT / "web"
 API_TOKEN = os.getenv("API_TOKEN", secrets.token_urlsafe(32))
@@ -46,6 +54,10 @@ _pipeline_state = {
     "finished_at": None,
     "error": None,
     "thread": None,
+    "progress": 0,
+    "current_country": "",
+    "total_countries": 23,
+    "current_phase": "",
 }
 _pipeline_lock = threading.Lock()
 
@@ -79,17 +91,39 @@ def _run_pipeline_background():
             _pipeline_state["status"] = "running"
             _pipeline_state["started_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
             _pipeline_state["error"] = None
+            _pipeline_state["progress"] = 0
+            _pipeline_state["current_country"] = ""
+            _pipeline_state["current_phase"] = "recolectando"
+            _pipeline_state["total_countries"] = 23
 
         _emit_pipeline_event({"type": "start", "message": "Pipeline iniciado"})
 
+        def progress_wrapper(event):
+            _emit_pipeline_event(event)
+            with _pipeline_lock:
+                if event.get("type") == "country_start":
+                    _pipeline_state["current_country"] = event.get("country", "")
+                    _pipeline_state["current_phase"] = "analizando"
+                    total = _pipeline_state["total_countries"]
+                    done = sum(1 for e in _pipeline_events if e.get("type") == "country_done") if total > 0 else 0
+                    _pipeline_state["progress"] = int(done / total * 100) if total > 0 else 0
+                elif event.get("type") == "country_done":
+                    _pipeline_state["progress"] = int((_pipeline_state.get("progress", 0)) + (100 / max(_pipeline_state["total_countries"], 1)))
+                    _pipeline_state["progress"] = min(_pipeline_state["progress"], 95)
+                elif event.get("type") == "complete":
+                    _pipeline_state["progress"] = 100
+                    _pipeline_state["current_phase"] = "completado"
+
         from main import main as pipeline_main
-        pipeline_main(progress_callback=_emit_pipeline_event)
+        pipeline_main(progress_callback=progress_wrapper)
 
         _emit_pipeline_event({"type": "complete", "message": "Pipeline completado"})
 
         with _pipeline_lock:
             _pipeline_state["status"] = "completed"
             _pipeline_state["finished_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+            _pipeline_state["progress"] = 100
+            _pipeline_state["current_phase"] = "completado"
     except Exception as exc:
         _emit_pipeline_event({"type": "error", "message": str(exc)})
         with _pipeline_lock:
@@ -154,15 +188,19 @@ class AppHandler(BaseHTTPRequestHandler):
         auth = self.headers.get("Authorization", "")
         if auth.startswith("Bearer "):
             token = auth[7:]
-            if secrets.compare_digest(token, API_TOKEN):
+            if secrets.compare_digest(token, API_TOKEN) or secrets.compare_digest(token, SESSION_TOKEN):
                 return True
-        origin = self.headers.get("Origin", "")
-        if origin in ("null", f"http://127.0.0.1:{_server_port}", f"http://localhost:{_server_port}"):
-            return True
-        referer = self.headers.get("Referer", "")
-        if referer.startswith(f"http://127.0.0.1:{_server_port}") or referer.startswith(f"http://localhost:{_server_port}"):
+        query_token = self._get_query_param("token")
+        if query_token and (secrets.compare_digest(query_token, API_TOKEN) or secrets.compare_digest(query_token, SESSION_TOKEN)):
             return True
         return False
+
+    def _get_query_param(self, name: str) -> str:
+        from urllib.parse import parse_qs
+        parsed = urlparse(self.path)
+        params = parse_qs(parsed.query)
+        values = params.get(name, [])
+        return values[0] if values else ""
 
     def _read_json_body(self):
         content_type = self.headers.get("Content-Type", "")
@@ -195,7 +233,7 @@ class AppHandler(BaseHTTPRequestHandler):
             return
 
         if path == "/api/token":
-            self._send_json({"token": API_TOKEN})
+            self._send_json({"token": API_TOKEN, "session": SESSION_TOKEN})
             return
 
         if path == "/api/history":
@@ -264,6 +302,10 @@ class AppHandler(BaseHTTPRequestHandler):
                     "started_at": _pipeline_state["started_at"],
                     "finished_at": _pipeline_state["finished_at"],
                     "error": _pipeline_state["error"],
+                    "progress": _pipeline_state.get("progress", 0),
+                    "current_country": _pipeline_state.get("current_country", ""),
+                    "total_countries": _pipeline_state.get("total_countries", 23),
+                    "current_phase": _pipeline_state.get("current_phase", ""),
                 })
             return
 
@@ -683,9 +725,8 @@ def run_server(host: str = "127.0.0.1", port: int = 8765):
     init_db()
     _load_schedules_from_db()
     server = ThreadingHTTPServer((host, port), AppHandler)
-    print(f"\n🚀 Interfaz local lista en http://{host}:{port}")
-    print(f"🧠 Modelo configurado: {OLLAMA_MODEL}")
-    print(f"🔑 Token API: {API_TOKEN}")
+    print(f"\nInterfaz local lista en http://{host}:{port}?token={SESSION_TOKEN}")
+    print(f"Modelo configurado: {OLLAMA_MODEL}")
     print("Presiona Ctrl+C para detenerla.\n")
     server.serve_forever()
 

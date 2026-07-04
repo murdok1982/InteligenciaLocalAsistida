@@ -1,5 +1,6 @@
-import requests
 from datetime import datetime, timedelta, timezone
+
+import requests
 
 
 def search_gdelt(country_name: str, category: str, days_back: int = 30, limit: int = 10):
@@ -24,11 +25,11 @@ def search_gdelt(country_name: str, category: str, days_back: int = 30, limit: i
         data = resp.json()
         articles = []
         for a in data.get("articles", [])[:limit]:
-            articles.append({  
+            articles.append({
                 "title": a.get("title") or "",
                 "url": a.get("url") or "",
                 "source": a.get("source") or "GDELT",
-                "date": a.get("seendate") or "",        
+                "date": a.get("seendate") or "",
                 "summary": a.get("title") or "",
                 "provider": "gdelt",
             })

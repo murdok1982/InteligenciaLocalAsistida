@@ -1,19 +1,19 @@
 """Unit tests for utils.llm module."""
 import os
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 import requests
 
 from utils.llm import (
-    _validate_model_name,
-    _ollama_available,
+    LLM_PROVIDER,
+    OLLAMA_BASE_URL,
+    OLLAMA_MODEL,
     _ask_ollama,
     _ask_openai,
+    _ollama_available,
+    _validate_model_name,
     ask_model,
-    LLM_PROVIDER,
-    OLLAMA_MODEL,
-    OLLAMA_BASE_URL,
 )
 
 

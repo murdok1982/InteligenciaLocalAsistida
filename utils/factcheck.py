@@ -316,3 +316,70 @@ def add_source_references(
     logger.info("Añadidas %d referencias a %d fuentes", len(verified_map), len(references_used))
 
     return result_text
+
+
+CRISIS_TRIGGER_WORDS = {
+    "es": [
+        "misil", "misiles", "sanciones", "sanción", "elecciones", "despliegue",
+        "escasez", "protestas", "conflicto", "guerra", "ataque", "invasión",
+        "movilización", "ejército", "armada", "nuclear", "explosión",
+        "derrumbe", "crisis", "emergencia", "desastre", "pandemia",
+        "negociaciones", "tratado", "acuerdo", "alianza", "embargo",
+        "aranceles", "inflación", "recesión", "default", "quiebra",
+        "golpe", "levantamiento", "revuelta", "huelga", "manifestación",
+        "ciberataque", "espionaje", "contrainteligencia", "radicalización",
+        "violencia", "genocidio", "crímenes", "tribunal", "investigación",
+        "dimisión", "destitución", "impeachment", "fraude", "corrupción",
+        "refugiados", "desplazados", "hambruna", "sequía", "inundación",
+    ],
+    "en": [
+        "missile", "sanctions", "election", "deployment", "shortage",
+        "protests", "conflict", "war", "attack", "invasion", "mobilization",
+        "military", "navy", "nuclear", "explosion", "collapse", "crisis",
+        "emergency", "disaster", "pandemic", "negotiations", "treaty",
+        "agreement", "alliance", "embargo", "tariffs", "inflation",
+        "recession", "default", "bankruptcy", "coup", "uprising", "revolt",
+        "strike", "cyberattack", "espionage", "counterintelligence",
+        "violence", "genocide", "crimes", "tribunal", "investigation",
+        "resignation", "impeachment", "fraud", "corruption", "refugees",
+        "displaced", "famine", "drought", "flood",
+    ],
+}
+
+
+def score_article_relevance(article_text: str, country_name: str = "") -> float:
+    text_lower = article_text.lower()
+    score = 0.0
+
+    for lang_words in CRISIS_TRIGGER_WORDS.values():
+        for word in lang_words:
+            if word in text_lower:
+                score += 1.0
+
+    country_words = country_name.lower().split()
+    for cw in country_words:
+        if len(cw) > 3 and cw in text_lower:
+            score += 2.0
+
+    text_len = len(text_lower)
+    if text_len > 0:
+        density = score / max(text_len, 1) * 1000
+        return min(density * 10, 100.0)
+    return 0.0
+
+
+def rank_articles(articles: list[dict], country_name: str = "", top_n: int = 15) -> list[dict]:
+    scored = []
+    for a in articles:
+        text = f"{a.get('title', '')} {a.get('summary', '')} {a.get('content', '')}"
+        relevance = score_article_relevance(text, country_name)
+        reliability_bonus = 0
+        rel = a.get("reliability", "B")
+        if rel == "A":
+            reliability_bonus = 20
+        elif rel == "B":
+            reliability_bonus = 10
+        scored.append((relevance + reliability_bonus, a))
+
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return [a for _, a in scored[:top_n]]

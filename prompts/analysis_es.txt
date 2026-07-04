@@ -1,5 +1,5 @@
 Redacta un análisis de inteligencia estratégica para {{ country }} (región: {{ region }}) cubriendo las últimas {{ days_back }} días.
-
+{{dynamic_focus}}
 Estructura el análisis en las siguientes dimensiones (usa encabezados Markdown):
 
 ## 1. Economía

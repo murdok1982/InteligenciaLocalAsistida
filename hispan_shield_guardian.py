@@ -4,11 +4,9 @@ HISPANSHIELD — GUARDIAN DE PROPIEDAD INTELECTUAL
 Propiedad de HispanShield (Legion de Ciberdefensa)
 General Murdok (Gustavo Lobato Clara)
 """
-import os
-import sys
-import socket
 import getpass
-import platform
+import socket
+import sys
 from datetime import datetime, timezone
 
 SEAL = """

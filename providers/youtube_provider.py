@@ -17,6 +17,34 @@ from utils.scraper import _is_ssrf
 _SOURCES_PATH = Path(__file__).parent.parent / "sources" / "sources.json"
 _RATE_LIMIT_S = 0.5
 
+_MAX_YOUTUBE_CHARS = 4000
+_TRIM_FIRST_CHARS = 200
+_TRIM_LAST_CHARS = 200
+
+_YOUTUBE_CLUTTER_PATTERNS = [
+    r"(?i)(suscr[íi]bete|subscribe|sub[ í]|sígueme|follow me)",
+    r"(?i)(dale like|like|comparte|share this video|click)",
+    r"(?i)(campanita|bell icon|notifications|notificaciones)",
+    r"(?i)(apoya el canal|support|patreon|paypal|donation)",
+    r"(?i)(s[íi]guenos en|follow us on|check out our)",
+    r"(?i)(membership|miembro|join this channel)",
+    r"(?i)(gracias por ver|thanks for watching|thanks for)",
+    r"(?i)(no olvides|don't forget|remember to)",
+    r"(?i)(mira este video|watch this|en este video veremos)",
+    r"(?i)(toda la info|link en descripci[óo]n|link in description)",
+    r"(?i)(activa la|turn on|enable)",
+]
+
+
+def clean_youtube_text(text: str) -> str:
+    text = re.sub(r"<[^>]+>", " ", text)
+    for pat in _YOUTUBE_CLUTTER_PATTERNS:
+        text = re.sub(pat, "", text)
+    text = re.sub(r"\s{2,}", " ", text).strip()
+    if len(text) > _TRIM_FIRST_CHARS + _TRIM_LAST_CHARS + 200:
+        text = text[_TRIM_FIRST_CHARS:-_TRIM_LAST_CHARS] if len(text) > _TRIM_FIRST_CHARS + _TRIM_LAST_CHARS else text
+    return text[:_MAX_YOUTUBE_CHARS]
+
 
 def _validate_youtube_feed_url(url: str) -> bool:
     """Validate YouTube feed URL against SSRF."""
@@ -54,12 +82,12 @@ def fetch_youtube_channels(limit_per_channel: int = 10) -> List[VideoItem]:
         try:
             feed = feedparser.parse(feed_url)
             for entry in feed.entries[:limit_per_channel]:
-                title = getattr(entry, "title", "") or ""
+                title = clean_youtube_text(getattr(entry, "title", "") or "")
                 link = getattr(entry, "link", "") or ""
                 published = getattr(entry, "published", "") or ""
                 summary = ""
                 if hasattr(entry, "summary"):
-                    summary = re.sub(r"<[^>]+>", "", entry.summary).strip()[:400]
+                    summary = clean_youtube_text(entry.summary)[:400]
                 items.append(VideoItem(
                     title=title,
                     url=link,
