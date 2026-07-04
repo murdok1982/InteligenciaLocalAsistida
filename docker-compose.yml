@@ -1,9 +1,7 @@
-version: "3.9"
-
 services:
 
   ollama:
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.6.8
     container_name: geoint_ollama
     ports:
       - "11434:11434"
@@ -11,31 +9,27 @@ services:
       - ollama_data:/root/.ollama
     environment:
       - OLLAMA_KEEP_ALIVE=24h
-    deploy:
-      resources:
-        limits:
-          memory: 8g
+    mem_limit: 8g
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      test: ["CMD-SHELL", "curl -sf http://localhost:11434/api/tags || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
 
   ollama-init:
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.6.8
     container_name: geoint_ollama_init
     depends_on:
       ollama:
         condition: service_healthy
-    volumes:
-      - ollama_data:/root/.ollama
-      - ./ollama_geoint.modelfile:/tmp/ollama_geoint.modelfile:ro
     environment:
       - OLLAMA_HOST=http://ollama:11434
+    volumes:
+      - ./ollama_geoint.modelfile:/tmp/ollama_geoint.modelfile:ro
     entrypoint: >
       sh -c "
-        ollama pull gemma4:4b &&
+        ollama pull gemma3:4b &&
         ollama create atalaya-geoint -f /tmp/ollama_geoint.modelfile &&
         echo 'Model ready.'
       "
@@ -50,14 +44,16 @@ services:
     depends_on:
       ollama:
         condition: service_healthy
+    ports:
+      - "8765:8765"
     volumes:
       - ./outputs:/app/outputs
       - ./.env:/app/.env:ro
     environment:
       - LLM_PROVIDER=ollama
       - OLLAMA_BASE_URL=http://ollama:11434
-      - OLLAMA_MODEL=atalaya-geoint
-    restart: "no"
+      - OLLAMA_MODEL=gemma3:4b
+    restart: on-failure
     profiles:
       - run
 

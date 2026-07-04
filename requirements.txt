@@ -6,7 +6,6 @@ jinja2>=3.1.4
 tqdm>=4.66.5
 tenacity>=9.0.0
 rich>=13.8.0
-pandas>=2.2.2
 
 # RSS / Feed parsing
 feedparser>=6.0.11
@@ -18,3 +17,6 @@ trafilatura>=1.12.0
 
 # OpenAI (optional — fallback only)
 openai>=1.44.0
+
+# Desktop app (optional)
+pywebview>=5.0

@@ -2,15 +2,11 @@
 run:
   days_back: 7
   per_country_limit: 20
-  providers: ["gdelt", "rss", "youtube"]   # options: gdelt, newsapi, rss, youtube
+  providers: ["gdelt", "rss", "youtube"]
   languages: ["es", "en"]
-  schedule: "weekly"                         # weekly | manual
+  schedule: "weekly"
 
 llm:
-  provider: ${LLM_PROVIDER:-ollama}          # ollama | openai | auto
-  ollama_model: ${OLLAMA_MODEL:-gemma4:4b}
-  ollama_base_url: ${OLLAMA_BASE_URL:-http://localhost:11434}
-  openai_model: ${OPENAI_MODEL:-gpt-4o-mini}
   temperature: 0.3
   max_tokens: 2000
 
@@ -18,7 +14,7 @@ report:
   output_dir: outputs
   filename_prefix: reporte_inteligencia_global
   include_tables: true
-  classification: ABIERTO                    # ABIERTO | RESTRINGIDO | CONFIDENCIAL
+  classification: ABIERTO
 
 categories:
   - key: economy

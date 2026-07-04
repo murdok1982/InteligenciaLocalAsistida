@@ -4,7 +4,11 @@ HISPANSHIELD — GUARDIAN DE PROPIEDAD INTELECTUAL
 Propiedad de HispanShield (Legion de Ciberdefensa)
 General Murdok (Gustavo Lobato Clara)
 """
-import os, sys, socket, getpass, platform
+import os
+import sys
+import socket
+import getpass
+import platform
 from datetime import datetime, timezone
 
 SEAL = """
@@ -15,12 +19,14 @@ SEAL = """
 =============================================
 """
 
+
 def audit():
     try:
         hostname = socket.gethostname()
         ip = socket.gethostbyname(hostname)
-    except:
-        hostname = "unknown"; ip = "0.0.0.0"
+    except OSError:
+        hostname = "unknown"
+        ip = "0.0.0.0"
     return {
         "usuario": getpass.getuser(),
         "hostname": hostname,
@@ -28,6 +34,8 @@ def audit():
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
-info = audit()
-print(SEAL, file=sys.stderr)
-print(f"  Usuario: {info['usuario']} | Host: {info['hostname']} | IP: {info['ip']}", file=sys.stderr)
+
+def print_seal():
+    info = audit()
+    print(SEAL, file=sys.stderr)
+    print(f"  Usuario: {info['usuario']} | Host: {info['hostname']} | IP: {info['ip']}", file=sys.stderr)

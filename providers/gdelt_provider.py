@@ -1,12 +1,18 @@
 import requests
+from datetime import datetime, timedelta, timezone
+
 
 def search_gdelt(country_name: str, category: str, days_back: int = 30, limit: int = 10):
+    end_date = datetime.now(timezone.utc)
+    start_date = end_date - timedelta(days=days_back)
     params = {
         "query": f"{country_name} {category}",
         "mode": "ArtList",
         "format": "json",
         "maxrecords": str(limit),
         "sort": "DateDesc",
+        "startdate": start_date.strftime("%Y%m%d000000"),
+        "enddate": end_date.strftime("%Y%m%d235959"),
     }
     try:
         resp = requests.get(
@@ -18,11 +24,11 @@ def search_gdelt(country_name: str, category: str, days_back: int = 30, limit: i
         data = resp.json()
         articles = []
         for a in data.get("articles", [])[:limit]:
-            articles.append({
+            articles.append({  
                 "title": a.get("title") or "",
                 "url": a.get("url") or "",
                 "source": a.get("source") or "GDELT",
-                "date": a.get("seendate") or "",
+                "date": a.get("seendate") or "",        
                 "summary": a.get("title") or "",
                 "provider": "gdelt",
             })

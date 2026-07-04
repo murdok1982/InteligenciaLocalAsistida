@@ -1,6 +1,6 @@
 import os
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from urllib.parse import quote_plus
 
 NEWSAPI_KEY = os.getenv("NEWSAPI_KEY", "")
@@ -15,7 +15,7 @@ def search_newsapi(
 ):
     if not NEWSAPI_KEY:
         return []
-    start_date = (datetime.utcnow() - timedelta(days=days_back)).date().isoformat()
+    start_date = (datetime.now(timezone.utc) - timedelta(days=days_back)).date().isoformat()
     q = quote_plus(f"{country_name} {category}")
     url = (
         f"https://newsapi.org/v2/everything?q={q}"

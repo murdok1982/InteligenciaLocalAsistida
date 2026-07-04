@@ -1,6 +1,7 @@
 """
 RSS/Atom aggregator using feedparser. No API key required.
 Reads source list from sources/sources.json.
+Includes SSRF protection via utils.scraper._is_ssrf.
 """
 import hashlib
 import json
@@ -11,6 +12,8 @@ from typing import List, Dict
 
 import feedparser
 from bs4 import BeautifulSoup
+
+from utils.scraper import _is_ssrf
 
 _SOURCES_PATH = Path(__file__).parent.parent / "sources" / "sources.json"
 _RATE_LIMIT_S = 0.5  # seconds between feed fetches
@@ -25,6 +28,11 @@ def _strip_html(text: str) -> str:
 
 def _dedup_key(article: dict) -> str:
     return hashlib.sha256((article.get("url") or article.get("title") or "").encode()).hexdigest()
+
+
+def _validate_feed_url(url: str) -> bool:
+    """Validate feed URL against SSRF."""
+    return not _is_ssrf(url)
 
 
 def fetch_rss_sources(
@@ -61,6 +69,8 @@ def fetch_rss_sources(
     for source in rss_sources:
         url = source.get("url")
         if not url:
+            continue
+        if not _validate_feed_url(url):
             continue
         try:
             feed = feedparser.parse(url)

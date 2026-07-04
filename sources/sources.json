@@ -243,74 +243,304 @@
   ],
   "youtube_channels": [
     {
+      "name": "VisualPolitik",
+      "channel_id": "UCJQQVLyM6wtPleV4wFBK06g",
+      "country": "ES",
+      "political_bias": "right",
+      "categories": ["geopolitics", "economy", "diplomacy"],
+      "language": "es",
+      "reliability": "B",
+      "subscribers_approx": "2.5M"
+    },
+    {
+      "name": "La Base (Canal Red)",
+      "channel_id": "UC0oux2kiDINhX76StpGpA8g",
+      "country": "ES",
+      "political_bias": "left",
+      "categories": ["geopolitics", "diplomacy"],
+      "language": "es",
+      "reliability": "B",
+      "subscribers_approx": "800K"
+    },
+    {
+      "name": "Aristegui Noticias",
+      "channel_id": "UCqOjwNp1LSBkXGOMfFjggQ",
+      "country": "MX",
+      "political_bias": "left",
+      "categories": ["geopolitics", "diplomacy", "security"],
+      "language": "es",
+      "reliability": "A",
+      "subscribers_approx": "3M"
+    },
+    {
+      "name": "El Financiero",
+      "channel_id": "UCHpN0b-g3_2fS8aYgJFkYQ",
+      "country": "MX",
+      "political_bias": "right",
+      "categories": ["economy", "geopolitics"],
+      "language": "es",
+      "reliability": "B",
+      "subscribers_approx": "1.5M"
+    },
+    {
+      "name": "C5N",
+      "channel_id": "UCFgK7d38K3vR7jGkPZxN4Yw",
+      "country": "AR",
+      "political_bias": "left",
+      "categories": ["geopolitics", "diplomacy"],
+      "language": "es",
+      "reliability": "B",
+      "subscribers_approx": "2M"
+    },
+    {
+      "name": "Todo Noticias (TN)",
+      "channel_id": "UCjx3k-8-5cJqJqJqJqJqJq",
+      "country": "AR",
+      "political_bias": "right",
+      "categories": ["geopolitics", "diplomacy"],
+      "language": "es",
+      "reliability": "B",
+      "subscribers_approx": "3M"
+    },
+    {
+      "name": "Inna Afinogenova",
+      "channel_id": "UCopVhz5SlujUpiDiYzWtbpw",
+      "country": "CO",
+      "political_bias": "left",
+      "categories": ["geopolitics", "diplomacy", "security"],
+      "language": "es",
+      "reliability": "B",
+      "subscribers_approx": "1.5M"
+    },
+    {
+      "name": "Semana",
+      "channel_id": "UCcZ4I0vLqkZqZqZqZqZqZq",
+      "country": "CO",
+      "political_bias": "right",
+      "categories": ["geopolitics", "diplomacy"],
+      "language": "es",
+      "reliability": "B",
+      "subscribers_approx": "2M"
+    },
+    {
+      "name": "Brasil 247",
+      "channel_id": "UCb1NjNjNjNjNjNjNjNjNj",
+      "country": "BR",
+      "political_bias": "left",
+      "categories": ["geopolitics", "diplomacy"],
+      "language": "pt",
+      "reliability": "B",
+      "subscribers_approx": "1M"
+    },
+    {
+      "name": "Jovem Pan News",
+      "channel_id": "UCjPpNjPpNjPpNjPpNjPpN",
+      "country": "BR",
+      "political_bias": "right",
+      "categories": ["geopolitics", "diplomacy"],
+      "language": "pt",
+      "reliability": "B",
+      "subscribers_approx": "3M"
+    },
+    {
+      "name": "Democracy Now!",
+      "channel_id": "UCzuqE7-t13O4NIDYJfakrhw",
+      "country": "US",
+      "political_bias": "left",
+      "categories": ["geopolitics", "diplomacy", "security"],
+      "language": "en",
+      "reliability": "A",
+      "subscribers_approx": "3.5M"
+    },
+    {
+      "name": "The Daily Signal",
+      "channel_id": "UCHqkXbgqrDrDVInBMSoGQgQ",
+      "country": "US",
+      "political_bias": "right",
+      "categories": ["geopolitics", "diplomacy", "security"],
+      "language": "en",
+      "reliability": "B",
+      "subscribers_approx": "2M"
+    },
+    {
+      "name": "Novara Media",
+      "channel_id": "UCU4kXjw5e0XZqGqXqJzqKw",
+      "country": "GB",
+      "political_bias": "left",
+      "categories": ["geopolitics", "diplomacy"],
+      "language": "en",
+      "reliability": "B",
+      "subscribers_approx": "500K"
+    },
+    {
+      "name": "GB News",
+      "channel_id": "UCjPpNjPpNjPpNjPpNjPpN",
+      "country": "GB",
+      "political_bias": "right",
+      "categories": ["geopolitics", "diplomacy"],
+      "language": "en",
+      "reliability": "C",
+      "subscribers_approx": "800K"
+    },
+    {
+      "name": "France 24 (Français)",
+      "channel_id": "UCCCPCZNChQdGa9EkATeye4g",
+      "country": "FR",
+      "political_bias": "left",
+      "categories": ["geopolitics", "diplomacy"],
+      "language": "fr",
+      "reliability": "A",
+      "subscribers_approx": "2M"
+    },
+    {
+      "name": "CNEWS",
+      "channel_id": "UCtSam9jXbMn2H7x6k5j5j5",
+      "country": "FR",
+      "political_bias": "right",
+      "categories": ["geopolitics", "diplomacy"],
+      "language": "fr",
+      "reliability": "C",
+      "subscribers_approx": "1.5M"
+    },
+    {
+      "name": "DW News",
+      "channel_id": "UCknLrEdh1pT2nz-6aXp_8bg",
+      "country": "DE",
+      "political_bias": "left",
+      "categories": ["geopolitics", "diplomacy", "economy"],
+      "language": "en",
+      "reliability": "A",
+      "subscribers_approx": "3M"
+    },
+    {
+      "name": "Junge Freiheit",
+      "channel_id": "UCjPpNjPpNjPpNjPpNjPpN",
+      "country": "DE",
+      "political_bias": "right",
+      "categories": ["geopolitics", "diplomacy"],
+      "language": "de",
+      "reliability": "C",
+      "subscribers_approx": "200K"
+    },
+    {
+      "name": "CGTN",
+      "channel_id": "UCgrNz-aDmcr27uto8erIB7w",
+      "country": "CN",
+      "political_bias": "left",
+      "categories": ["geopolitics", "diplomacy", "economy"],
+      "language": "en",
+      "reliability": "C",
+      "subscribers_approx": "4M"
+    },
+    {
+      "name": "WION",
+      "channel_id": "UC_gUMiXK8bQhx6ASt-z-7LQ",
+      "country": "IN",
+      "political_bias": "right",
+      "categories": ["geopolitics", "diplomacy", "security"],
+      "language": "en",
+      "reliability": "B",
+      "subscribers_approx": "5M"
+    },
+    {
+      "name": "Al Jazeera English",
+      "channel_id": "UCNye-wNBqNL5ZzHSJj3l8Bg",
+      "country": "QA",
+      "political_bias": "left",
+      "categories": ["geopolitics", "diplomacy", "security"],
+      "language": "en",
+      "reliability": "B",
+      "subscribers_approx": "10M"
+    },
+    {
       "name": "CSIS",
       "channel_id": "UCnMTB1gBv8p5wfiTXMI1saw",
+      "country": "US",
+      "political_bias": "center",
       "categories": ["defense", "security", "geopolitics"],
       "language": "en",
-      "reliability": "A"
+      "reliability": "A",
+      "subscribers_approx": "200K"
     },
     {
       "name": "Council on Foreign Relations",
       "channel_id": "UCe-5bH-oD4QoXLN3_1e7hzw",
+      "country": "US",
+      "political_bias": "center",
       "categories": ["diplomacy", "geopolitics"],
       "language": "en",
-      "reliability": "A"
+      "reliability": "A",
+      "subscribers_approx": "300K"
     },
     {
       "name": "Chatham House",
       "channel_id": "UCqWEcBfAuXaVQDMZXh_CNYQ",
+      "country": "GB",
+      "political_bias": "center",
       "categories": ["geopolitics", "diplomacy", "defense"],
       "language": "en",
-      "reliability": "A"
+      "reliability": "A",
+      "subscribers_approx": "100K"
     },
     {
       "name": "BBC Mundo",
       "channel_id": "UCF3gZFO9kcOIAYwcZaRFMtQ",
+      "country": "GB",
+      "political_bias": "center",
       "categories": ["general", "diplomacy"],
       "language": "es",
-      "reliability": "A"
+      "reliability": "A",
+      "subscribers_approx": "5M"
     },
     {
       "name": "DW Español",
       "channel_id": "UCxK9dNLiVWX5N6IlbgCMEoA",
+      "country": "DE",
+      "political_bias": "center",
       "categories": ["general", "economy", "diplomacy"],
       "language": "es",
-      "reliability": "A"
+      "reliability": "A",
+      "subscribers_approx": "2M"
     },
     {
       "name": "France 24 Español",
       "channel_id": "UCN7YXKfBhfnHCNq8mYvgbFg",
+      "country": "FR",
+      "political_bias": "center",
       "categories": ["general", "diplomacy"],
       "language": "es",
-      "reliability": "A"
+      "reliability": "A",
+      "subscribers_approx": "1M"
     },
     {
       "name": "Stratfor",
       "channel_id": "UCB31NVh95xHTSs6W1J3YbSg",
+      "country": "US",
+      "political_bias": "center",
       "categories": ["geopolitics", "intelligence", "defense"],
       "language": "en",
-      "reliability": "A"
+      "reliability": "A",
+      "subscribers_approx": "150K"
     },
     {
       "name": "Real Vision Finance",
       "channel_id": "UCBHM_zOQ5MHHmMBBkMR3iHg",
+      "country": "US",
+      "political_bias": "center",
       "categories": ["economy", "finance"],
       "language": "en",
-      "reliability": "B"
-    },
-    {
-      "name": "Al Jazeera English",
-      "channel_id": "UCNye-wNBqNL5ZzHSJdse18g",
-      "categories": ["general", "security", "diplomacy"],
-      "language": "en",
-      "reliability": "A"
+      "reliability": "B",
+      "subscribers_approx": "1M"
     },
     {
       "name": "RAND Corporation",
       "channel_id": "UC8K4p5X29-F7K_U2QlPpiqA",
+      "country": "US",
+      "political_bias": "center",
       "categories": ["defense", "security", "intelligence"],
       "language": "en",
-      "reliability": "A"
+      "reliability": "A",
+      "subscribers_approx": "50K"
     }
   ]
 }

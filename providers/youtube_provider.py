@@ -1,6 +1,7 @@
 """
 YouTube OSINT via public RSS feeds — no API key required.
 Uses https://www.youtube.com/feeds/videos.xml?channel_id=CHANNEL_ID
+Includes SSRF protection via utils.scraper._is_ssrf.
 """
 import json
 import re
@@ -11,8 +12,15 @@ from typing import List
 
 import feedparser
 
+from utils.scraper import _is_ssrf
+
 _SOURCES_PATH = Path(__file__).parent.parent / "sources" / "sources.json"
 _RATE_LIMIT_S = 0.5
+
+
+def _validate_youtube_feed_url(url: str) -> bool:
+    """Validate YouTube feed URL against SSRF."""
+    return not _is_ssrf(url)
 
 
 @dataclass
@@ -41,6 +49,8 @@ def fetch_youtube_channels(limit_per_channel: int = 10) -> List[VideoItem]:
         if not channel_id:
             continue
         feed_url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
+        if not _validate_youtube_feed_url(feed_url):
+            continue
         try:
             feed = feedparser.parse(feed_url)
             for entry in feed.entries[:limit_per_channel]:
