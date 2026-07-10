@@ -14,12 +14,16 @@ dist/
 venv/
 env/
 .venv/
+*.pyc
+*.pyo
 
 # IDEs
 .vscode/
 .idea/
 .DS_Store
 *.swp
+*.swo
+*~
 
 # Logs
 logs/
@@ -33,17 +37,21 @@ downloads/
 reports/
 *.pdf
 *.html
+*.csv
 
 # OSINT data
 osint_results/
 news_cache/
 entity_tracking/
+imports/
 
 # Secrets
 config.ini
 secrets.json
 *.pem
 *.key
+*.cer
+*.crt
 
 # Jupyter
 .ipynb_checkpoints/
@@ -51,3 +59,18 @@ secrets.json
 # Testing
 .pytest_cache/
 .coverage
+coverage/
+htmlcov/
+*.coverage.*
+
+# Ruff
+.ruff_cache/
+
+# Mypy
+.mypy_cache/
+.mypy/
+
+# Runtime
+*.pid
+*.seed
+*.lock

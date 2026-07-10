@@ -1,4 +1,5 @@
 import logging
+import os
 import subprocess
 from typing import Optional
 
@@ -6,7 +7,7 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-OLLAMA_URL = "http://localhost:11434"
+OLLAMA_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 EMBEDDING_MODEL = "nomic-embed-text"
 
 

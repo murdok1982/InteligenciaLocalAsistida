@@ -8,6 +8,7 @@ import os
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
+from os import PathLike
 from pathlib import Path
 from threading import Lock
 
@@ -52,8 +53,12 @@ def _setup_logging() -> None:
     )
 
 
-def read_prompt(path: str) -> str:
-    with open(path, "r", encoding="utf-8") as f:
+_ROOT = Path(__file__).resolve().parent
+
+
+def read_prompt(path: str | PathLike) -> str:
+    abs_path = path if Path(path).is_absolute() else _ROOT / path
+    with open(abs_path, "r", encoding="utf-8") as f:
         return f.read()
 
 
@@ -71,8 +76,10 @@ def collect_articles(
     use_youtube: bool,
 ) -> list:
     import yaml
+    cfg_air = None
     try:
-        with open("config.yaml") as f:
+        cfg_path = _ROOT / "config.yaml"
+        with open(cfg_path) as f:
             cfg_air = yaml.safe_load(f)
         air_gapped = cfg_air.get("air_gapped", {}).get("enabled", False)
     except Exception:
@@ -81,8 +88,9 @@ def collect_articles(
     if air_gapped:
         logger.info("MODO AIR-GAPPED activado — solo fuentes locales")
         local_articles = []
-        import_dir = cfg_air.get("air_gapped", {}).get("data_import_dir", "imports") if 'cfg_air' in dir() else "imports"
-        import_path = Path(__file__).parent / import_dir
+        import_dir = (cfg_air.get("air_gapped", {}).get("data_import_dir", "imports")
+                      if cfg_air else "imports")
+        import_path = _ROOT / import_dir
         if import_path.exists():
             for fpath in import_path.glob("*.*"):
                 try:
@@ -295,7 +303,7 @@ def _analyze_country(
 
     contradiction_matrix = ""
     try:
-        contradiction_prompt = read_prompt("prompts/contradiction_es.txt")
+        contradiction_prompt = read_prompt(_ROOT / "prompts" / "contradiction_es.txt")
         contradiction_prompt = Template(contradiction_prompt).render(country=name)
 
         _STATE_MEDIA_KEYWORDS = ["tass", "rt.com", "xinhua", "presstv", "cgtn", "sputnik", "fars", "irna", "kremlin", "gov.cn"]
@@ -360,7 +368,7 @@ def main(progress_callback=None, countries: list[str] = None, days_back: int = N
     _setup_logging()
     init_db()
 
-    cfg = load_config("config.yaml")
+    cfg = load_config(str(_ROOT / "config.yaml"))
     if days_back is not None:
         cfg["run"]["days_back"] = days_back
     if classification is not None:
@@ -400,10 +408,11 @@ def main(progress_callback=None, countries: list[str] = None, days_back: int = N
     logger.info("Países a analizar: %d", len(cfg["countries"]))
     logger.info("Período: últimos %d días", days_back)
 
-    analysis_tpl = read_prompt("prompts/analysis_es.txt")
-    forecast_tpl = read_prompt("prompts/forecast_es.txt")
-    synthesis_tpl = read_prompt("prompts/synthesis_es.txt")
-    report_tpl = read_prompt("prompts/report_bilingual.txt")
+    prompt_dir = _ROOT / "prompts"
+    analysis_tpl = read_prompt(prompt_dir / "analysis_es.txt")
+    forecast_tpl = read_prompt(prompt_dir / "forecast_es.txt")
+    synthesis_tpl = read_prompt(prompt_dir / "synthesis_es.txt")
+    report_tpl = read_prompt(prompt_dir / "report_bilingual.txt")
 
     country_sections_es: list[str] = []
     country_sections_en: list[str] = []

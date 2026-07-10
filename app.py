@@ -9,7 +9,7 @@ import uuid
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 logger = logging.getLogger(__name__)
 
@@ -22,11 +22,13 @@ if ENV_PATH.exists():
 
 from utils.database import (
     delete_analysis,
+    delete_schedule,
     get_analysis,
     get_history,
     get_schedules,
     init_db,
     save_analysis,
+    save_schedule,
 )
 from utils.database import (
     get_reports as db_get_reports,
@@ -150,8 +152,13 @@ class AppHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Security-Policy", "default-src 'self' 'unsafe-inline'")
         self.send_header("Referrer-Policy", "strict-origin-when-cross-origin")
         self.send_header("Access-Control-Allow-Origin", "null")
+        self._send_security_headers()
         self.end_headers()
         self.wfile.write(body)
+
+    def _send_security_headers(self):
+        self.send_header("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
+        self.send_header("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
 
     def _send_file(self, file_path: Path, content_type: str):
         body = file_path.read_bytes()
@@ -162,6 +169,7 @@ class AppHandler(BaseHTTPRequestHandler):
         self.send_header("X-Frame-Options", "DENY")
         self.send_header("Content-Security-Policy", "default-src 'self' 'unsafe-inline'")
         self.send_header("Referrer-Policy", "strict-origin-when-cross-origin")
+        self._send_security_headers()
         self.end_headers()
         self.wfile.write(body)
 
@@ -173,6 +181,7 @@ class AppHandler(BaseHTTPRequestHandler):
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("X-Frame-Options", "DENY")
         self.send_header("Access-Control-Allow-Origin", "null")
+        self._send_security_headers()
         self.end_headers()
         try:
             for token in generator:
@@ -193,13 +202,9 @@ class AppHandler(BaseHTTPRequestHandler):
             token = auth[7:]
             if secrets.compare_digest(token, API_TOKEN) or secrets.compare_digest(token, SESSION_TOKEN):
                 return True
-        query_token = self._get_query_param("token")
-        if query_token and (secrets.compare_digest(query_token, API_TOKEN) or secrets.compare_digest(query_token, SESSION_TOKEN)):
-            return True
         return False
 
     def _get_query_param(self, name: str) -> str:
-        from urllib.parse import parse_qs
         parsed = urlparse(self.path)
         params = parse_qs(parsed.query)
         values = params.get(name, [])
@@ -226,17 +231,18 @@ class AppHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
 
+        client_ip = self.client_address[0]
+        if not _check_rate(client_ip):
+            self._send_json({"error": "rate_limit_exceeded"}, 429)
+            return
+
         if path == "/api/health":
-            self._send_json({"ok": True, "provider": LLM_PROVIDER, "model": OLLAMA_MODEL})
+            self._send_json({"ok": True, "provider": LLM_PROVIDER, "model": OLLAMA_MODEL, "session": SESSION_TOKEN})
             return
 
         if path == "/api/ollama/status":
             from utils.llm import _ollama_available
             self._send_json({"ok": True, "ollama_available": _ollama_available(), "model": OLLAMA_MODEL})
-            return
-
-        if path == "/api/token":
-            self._send_json({"token": API_TOKEN, "session": SESSION_TOKEN})
             return
 
         if path == "/api/history":
@@ -486,6 +492,7 @@ class AppHandler(BaseHTTPRequestHandler):
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("X-Frame-Options", "DENY")
         self.send_header("Access-Control-Allow-Origin", "null")
+        self._send_security_headers()
         self.end_headers()
         try:
             for event in event_generator():
@@ -509,6 +516,10 @@ class AppHandler(BaseHTTPRequestHandler):
 
         if not self._check_auth():
             self._send_json({"error": "unauthorized"}, 401)
+            return
+
+        if path == "/api/history":
+            self._handle_save_history()
             return
 
         if path == "/api/analyze":
@@ -568,6 +579,10 @@ class AppHandler(BaseHTTPRequestHandler):
                     timer.cancel()
                 schedule["active"] = False
                 del _schedules[sid]
+            try:
+                delete_schedule(sid)
+            except Exception:
+                pass
             self._send_json({"ok": True, "cancelled": True})
             return
 
@@ -639,6 +654,29 @@ class AppHandler(BaseHTTPRequestHandler):
 
         self._send_sse(token_generator())
 
+    def _handle_save_history(self):
+        data, err = self._read_json_body()
+        if err:
+            self._send_json({"error": err[0]}, err[1])
+            return
+
+        prompt = (data.get("prompt") or "").strip()
+        response = (data.get("response") or "").strip()
+        if not prompt or not response:
+            self._send_json({"error": "prompt_and_response_required"}, 400)
+            return
+
+        record_id = str(uuid.uuid4())
+        region = data.get("region", "")
+        country = data.get("country")
+        model = data.get("model") or OLLAMA_MODEL
+        system = data.get("system", "")
+        temperature = float(data.get("temperature", 0.3))
+        max_tokens = int(data.get("max_tokens", 2000))
+
+        save_analysis(record_id, prompt, response, model, LLM_PROVIDER, system, temperature, max_tokens, "done", region=region, country=country)
+        self._send_json({"ok": True, "id": record_id})
+
     def _handle_schedule_create(self):
         data, err = self._read_json_body()
         if err:
@@ -692,6 +730,8 @@ class AppHandler(BaseHTTPRequestHandler):
 
         timer.start()
 
+        save_schedule(schedule_id, prompt, system, temperature, max_tokens, interval)
+
         self._send_json({
             "ok": True,
             "id": schedule_id,
@@ -729,8 +769,9 @@ class AppHandler(BaseHTTPRequestHandler):
 
         self._send_json({"ok": True, "status": "started", "countries": countries or "all"})
 
-    def log_message(self, format, *args):
-        return
+    def log_message(self, msg_format, *args):
+        if args and len(args) > 2 and int(args[1]) >= 400:
+            logger.warning("HTTP %s %s - %s", args[1], args[0], args[2])
 
 
 def _load_schedules_from_db():
@@ -789,7 +830,7 @@ def run_server(host: str = "127.0.0.1", port: int = 8765):
     global _watchdog_stop, _watchdog_thread
     _watchdog_stop, _watchdog_thread = start_watchdog()
     server = ThreadingHTTPServer((host, port), AppHandler)
-    print(f"\nInterfaz local lista en http://{host}:{port}?token={SESSION_TOKEN}")
+    print(f"\nInterfaz local lista en http://{host}:{port}")
     print(f"Modelo configurado: {OLLAMA_MODEL}")
     print("Presiona Ctrl+C para detenerla.\n")
     server.serve_forever()
